@@ -29,6 +29,7 @@ public class EmailService {
 
     }
 
+    // test
     @Async
     public void sendOTPUser(String email, String otp, OtpPurpose purpose) {
         String subject;
