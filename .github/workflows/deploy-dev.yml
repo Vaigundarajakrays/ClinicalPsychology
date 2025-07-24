@@ -1,4 +1,4 @@
-name: 🚧 Deploy TherapistBooster to Dev EC2
+name: 🚧 Deploy MentorBooster to Dev EC2
 
 on:
   push:
@@ -32,7 +32,7 @@ jobs:
           # ✅ .mvn/wrapper/
           #
           # Otherwise, GitHub Actions won't know how to run Maven and this step will fail!
-          chmod +x mvnw
+          chmod +x mvnw 
           ./mvnw clean package -DskipTests
           echo "✅ Build complete!"
         continue-on-error: false
@@ -44,7 +44,7 @@ jobs:
           username: ${{ secrets.EC2_DEV_USER }}
           key: ${{ secrets.EC2_DEV_SSH_KEY }}
           source: "target/*.jar"
-          target: "~/therapistbooster-deploy"
+          target: "~/mentorbooster-deploy"
           strip_components: 1
         continue-on-error: false
 
@@ -56,32 +56,35 @@ jobs:
           key: ${{ secrets.EC2_DEV_SSH_KEY }}
           script: |
             echo "🔍 Navigating to deploy directory..."
-            cd ~/therapistbooster-deploy
-
+            cd ~/mentorbooster-deploy
+            
             echo "🔍 Searching for latest .jar file..."
             latest_file=$(ls -t *.jar 2>/dev/null | head -n 1)
-
+            
             if [ -z "$latest_file" ]; then
               echo "❌ No .jar files found. Exiting..."
               exit 1
             fi
-
+            
             echo "✅ Found: $latest_file"
-
+            
             timestamp=$(TZ='Asia/Kolkata' date +"%Y-%m-%d-%H-%M-%S")
             echo "🕒 IST Timestamp: $timestamp"
-
-            new_name="therapistbooster-${timestamp}.jar"
+            
+            new_name="mentorbooster-${timestamp}.jar"
             echo "📦 Renaming '$latest_file' → '$new_name'"
             mv "$latest_file" "$new_name"
-
-            echo "🔗 Updating symlink 'therapistbooster-latest.jar' → '$new_name'"
-            ln -sf "$new_name" therapistbooster-latest.jar
-
-            echo "✅ Rename and symlink update complete!"
+            
+            echo "🔗 Updating symlink 'mentorbooster-latest.jar' → '$new_name'"
+            ln -sf "$new_name" mentorbooster-latest.jar
+            
+            echo "🧹 Cleaning up old .jar files (keeping latest 10 only)..."
+            ls -tp *.jar | grep -v '/$' | tail -n +11 | xargs -r rm --
+            
+            echo "✅ Rename and symlink, and cleanup complete!"
         continue-on-error: false
 
-      - name: 🔁 Restart TherapistBooster app on Dev EC2
+      - name: 🔁 Restart MentorBooster app on Dev EC2
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.EC2_DEV_HOST }}
@@ -89,10 +92,10 @@ jobs:
           key: ${{ secrets.EC2_DEV_SSH_KEY }}
           script: |
             echo "🧠 Navigating to deploy directory..."
-            cd ~/therapistbooster-deploy
-
+            cd ~/mentorbooster-deploy
+            
             echo "🧹 Restarting app using start.sh"
             ./start.sh
-
+            
             echo "🚀 App restarted! Check log.txt for logs."
         continue-on-error: false
