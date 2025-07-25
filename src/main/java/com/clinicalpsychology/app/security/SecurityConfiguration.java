@@ -44,6 +44,7 @@ public class SecurityConfiguration {
                                 "/api/client/register",
                                 "/api/ai-therapist/stream",
                                 "/api/contact-messages",
+                                "/api/therapist/search",
                                 "/api/categories",
                                 "/api/therapist/getAllTherapists",
                                 "/api/s3/upload/**",
