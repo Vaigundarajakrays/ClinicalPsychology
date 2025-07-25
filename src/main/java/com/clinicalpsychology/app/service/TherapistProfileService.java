@@ -466,10 +466,10 @@ public class TherapistProfileService {
 
         try {
 
-            if ("null".equalsIgnoreCase(name)) name = null;
-            if ("null".equalsIgnoreCase(location)) location = null;
-            if ("null".equalsIgnoreCase(category)) category = null;
-            if ("null".equalsIgnoreCase(priceRange)) priceRange = null;
+            if (name == null || name.trim().isEmpty() || "null".equalsIgnoreCase(name)) name = null;
+            if (location == null || location.trim().isEmpty() || "null".equalsIgnoreCase(location)) location = null;
+            if (category == null || category.trim().isEmpty() || "null".equalsIgnoreCase(category)) category = null;
+            if (priceRange == null || priceRange.trim().isEmpty() || "null".equalsIgnoreCase(priceRange)) priceRange = null;
 
             Double minPrice = null;
             Double maxPrice = null;
