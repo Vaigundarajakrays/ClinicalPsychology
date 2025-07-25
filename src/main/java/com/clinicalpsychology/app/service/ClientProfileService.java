@@ -61,11 +61,6 @@ public class ClientProfileService {
                 throw new ResourceAlreadyExistsException(ALREADY_REGISTERED_THERAPIST_EMAIL);
             }
 
-            // Validate required fields
-            if (clientDto.getTimezone() == null || clientDto.getTimezone().isBlank()) {
-                throw new InvalidFieldValueException(TIMEZONE_REQUIRED);
-            }
-
             // Encrypt password
             String hashedPassword = passwordEncoder.encode(clientDto.getPassword());
 
@@ -79,6 +74,9 @@ public class ClientProfileService {
                     .goals(clientDto.getGoals())
                     .timeZone(clientDto.getTimezone())
                     .profileUrl(clientDto.getProfileUrl())
+                    .address(clientDto.getAddress())
+                    .dob(clientDto.getDob())
+                    .gender(clientDto.getGender())
                     .status(ACTIVE)
                     .build();
 

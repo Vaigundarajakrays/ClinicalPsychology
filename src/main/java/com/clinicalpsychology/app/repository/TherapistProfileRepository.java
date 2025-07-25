@@ -26,12 +26,16 @@ public interface TherapistProfileRepository extends JpaRepository<TherapistProfi
 
     boolean existsByIdAndEmail(Long id, String email);
 
-    @Query("SELECT DISTINCT t FROM TherapistProfile t JOIN t.categories c WHERE " +
-            "(:name IS NULL OR LOWER(t.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
-            "(:location IS NULL OR LOWER(t.location) LIKE LOWER(CONCAT('%', :location, '%'))) AND " +
-            "(:minPrice IS NULL OR t.amount >= :minPrice) AND " +
-            "(:maxPrice IS NULL OR t.amount <= :maxPrice) AND " +
-            "(:category IS NULL OR LOWER(c) LIKE LOWER(CONCAT('%', :category, '%')))")
+    @Query("""
+    SELECT DISTINCT t FROM TherapistProfile t 
+    JOIN t.categories c 
+    WHERE 
+        (LOWER(t.name) LIKE LOWER(CONCAT('%', :name, '%')) OR :name IS NULL) AND 
+        (LOWER(t.location) LIKE LOWER(CONCAT('%', :location, '%')) OR :location IS NULL) AND 
+        (t.amount >= :minPrice OR :minPrice IS NULL) AND 
+        (t.amount <= :maxPrice OR :maxPrice IS NULL) AND 
+        (LOWER(c) LIKE LOWER(CONCAT('%', :category, '%')) OR :category IS NULL)
+    """)
     List<TherapistProfile> searchTherapists(
             @Param("name") String name,
             @Param("location") String location,

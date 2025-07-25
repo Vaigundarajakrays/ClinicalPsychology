@@ -34,11 +34,15 @@ public class ClientProfile extends BaseEntity{
     @Column(columnDefinition = "TEXT")
     private String description;
 
-    @Column(nullable = false)
     private List<String> goals;
 
-    @Column(nullable = false)
     private String timeZone;
+
+    private String gender;
+
+    private String dob;
+
+    private String address;
 
 //    @Column(nullable = false)
     private String profileUrl;

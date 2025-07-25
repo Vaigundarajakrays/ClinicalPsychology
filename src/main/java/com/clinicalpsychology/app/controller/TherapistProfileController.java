@@ -46,12 +46,7 @@ public class TherapistProfileController {
 //    }
 
     @GetMapping("/search")
-    public CommonResponse<List<TherapistProfile>> searchTherapists(
-            @RequestParam(required = false) String name,
-            @RequestParam(required = false) String location,
-            @RequestParam(required = false) String category,
-            @RequestParam(required = false) String price
-    ) throws UnexpectedServerException {
+    public CommonResponse<List<TherapistProfile>> searchTherapists(@RequestParam(required = false) String name, @RequestParam(required = false) String location, @RequestParam(required = false) String category, @RequestParam(required = false) String price) throws UnexpectedServerException {
         return therapistProfileService.search(name, location, category, price);
     }
 

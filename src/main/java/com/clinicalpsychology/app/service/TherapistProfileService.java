@@ -466,17 +466,30 @@ public class TherapistProfileService {
 
         try {
 
+            if ("null".equalsIgnoreCase(name)) name = null;
+            if ("null".equalsIgnoreCase(location)) location = null;
+            if ("null".equalsIgnoreCase(category)) category = null;
+            if ("null".equalsIgnoreCase(priceRange)) priceRange = null;
+
             Double minPrice = null;
             Double maxPrice = null;
 
             // Parse price=1-20 into minPrice and maxPrice
-            if (priceRange != null && priceRange.contains("-")) {
+            if (priceRange != null) {
                 try {
-                    String[] parts = priceRange.split("-");
-                    minPrice = Double.parseDouble(parts[0]);
-                    maxPrice = Double.parseDouble(parts[1]);
-                } catch (Exception e) {
-                    throw new InvalidFieldValueException("Invalid price format. Use price=1-20");
+                    if (priceRange.contains("-")) {
+                        // Case: price = 100-300
+                        String[] parts = priceRange.split("-");
+                        minPrice = Double.parseDouble(parts[0]);
+                        maxPrice = Double.parseDouble(parts[1]);
+                    } else {
+                        // Case: price = 200 (single value)
+                        double price = Double.parseDouble(priceRange);
+                        minPrice = price;
+                        maxPrice = price;
+                    }
+                } catch (NumberFormatException e) {
+                    throw new InvalidFieldValueException("Invalid price format. Use price=1-20 or price=200");
                 }
             }
 

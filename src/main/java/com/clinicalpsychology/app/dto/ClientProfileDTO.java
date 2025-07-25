@@ -30,6 +30,11 @@ public class ClientProfileDTO {
     private String location;
     private List<String> goals;
     private String status;
+    private String gender;
+
+    private String dob;
+
+    private String address;
 
 
 //    private String businessStage;

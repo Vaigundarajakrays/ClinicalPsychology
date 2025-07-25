@@ -67,7 +67,7 @@ public class TherapistSeeder implements CommandLineRunner {
 
                 TherapistSeederDTO.builder()
                         .therapistEmail("aisha.williams@gmail.com")
-                        .phone("9999999999")
+                        .phone("7777777777")
                         .timezone("America/New_York")
                         .password("aisha@123")
                         .name("Dr. Aisha Williams")
