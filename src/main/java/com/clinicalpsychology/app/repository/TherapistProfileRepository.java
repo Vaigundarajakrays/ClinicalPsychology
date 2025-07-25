@@ -4,6 +4,8 @@ import com.clinicalpsychology.app.enumUtil.AccountStatus;
 import com.clinicalpsychology.app.enumUtil.ApprovalStatus;
 import com.clinicalpsychology.app.model.TherapistProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 import java.util.Optional;
@@ -23,4 +25,18 @@ public interface TherapistProfileRepository extends JpaRepository<TherapistProfi
     List<TherapistProfile> findAllByApprovalStatusAndAccountStatus(ApprovalStatus approvalStatus, AccountStatus accountStatus);
 
     boolean existsByIdAndEmail(Long id, String email);
+
+    @Query("SELECT DISTINCT t FROM TherapistProfile t JOIN t.categories c WHERE " +
+            "(:name IS NULL OR LOWER(t.name) LIKE LOWER(CONCAT('%', :name, '%'))) AND " +
+            "(:location IS NULL OR LOWER(t.location) LIKE LOWER(CONCAT('%', :location, '%'))) AND " +
+            "(:minPrice IS NULL OR t.amount >= :minPrice) AND " +
+            "(:maxPrice IS NULL OR t.amount <= :maxPrice) AND " +
+            "(:category IS NULL OR LOWER(c) LIKE LOWER(CONCAT('%', :category, '%')))")
+    List<TherapistProfile> searchTherapists(
+            @Param("name") String name,
+            @Param("location") String location,
+            @Param("minPrice") Double minPrice,
+            @Param("maxPrice") Double maxPrice,
+            @Param("category") String category);
+
 }

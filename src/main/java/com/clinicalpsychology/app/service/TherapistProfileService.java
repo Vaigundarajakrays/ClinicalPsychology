@@ -27,6 +27,7 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import static com.clinicalpsychology.app.util.Constant.*;
 
@@ -459,5 +460,49 @@ public class TherapistProfileService {
                 .categories(therapistProfile.getCategories())
                 .summary(therapistProfile.getSummary())
                 .build();
+    }
+
+    public CommonResponse<List<TherapistProfile>> search(String name, String location, String category, String priceRange) throws UnexpectedServerException {
+
+        try {
+
+            Double minPrice = null;
+            Double maxPrice = null;
+
+            // Parse price=1-20 into minPrice and maxPrice
+            if (priceRange != null && priceRange.contains("-")) {
+                try {
+                    String[] parts = priceRange.split("-");
+                    minPrice = Double.parseDouble(parts[0]);
+                    maxPrice = Double.parseDouble(parts[1]);
+                } catch (Exception e) {
+                    throw new InvalidFieldValueException("Invalid price format. Use price=1-20");
+                }
+            }
+
+            // Call DB filter
+            List<TherapistProfile> result = therapistProfileRepository.searchTherapists(name, location, minPrice, maxPrice, category);
+
+            if (result.isEmpty()) {
+                return CommonResponse.<List<TherapistProfile>>builder()
+                        .status(STATUS_FALSE)
+                        .statusCode(SUCCESS_CODE)
+                        .message("No therapists found")
+                        .data(List.of())
+                        .build();
+            }
+
+            return CommonResponse.<List<TherapistProfile>>builder()
+                    .status(STATUS_TRUE)
+                    .statusCode(SUCCESS_CODE)
+                    .message("Therapists fetched successfully")
+                    .data(result)
+                    .build();
+
+        } catch (InvalidFieldValueException e){
+            throw e;
+        } catch (Exception e){
+            throw new UnexpectedServerException("Error while loading therapists: " + e.getMessage());
+        }
     }
 }

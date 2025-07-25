@@ -46,7 +46,9 @@ public class TherapistProfile extends BaseEntity {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
-    @Column(nullable = false)
+    @ElementCollection
+    @CollectionTable(name = "therapist_profile_categories", joinColumns = @JoinColumn(name = "therapist_profile_id"))
+    @Column(name = "category", columnDefinition = "TEXT")
     private List<String> categories;
 
     @Column(nullable = false, columnDefinition = "TEXT")
@@ -66,6 +68,8 @@ public class TherapistProfile extends BaseEntity {
 
     @Column(nullable = false)
     private String timezone;
+
+    private String location;
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)

@@ -5,6 +5,7 @@ import com.clinicalpsychology.app.dto.TherapistDashboardDTO;
 import com.clinicalpsychology.app.dto.TherapistProfileDTO;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
 import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.model.TherapistProfile;
 import com.clinicalpsychology.app.response.CommonResponse;
 import com.clinicalpsychology.app.service.TherapistProfileService;
 import lombok.RequiredArgsConstructor;
@@ -43,6 +44,16 @@ public class TherapistProfileController {
 //    public CommonResponse<List<TherapistProfileDTO>> getTherapistsByCategoryName(@RequestParam String category) {
 //        return therapistProfileService.getTherapistsByCategoryName(category);
 //    }
+
+    @GetMapping("/search")
+    public CommonResponse<List<TherapistProfile>> searchTherapists(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) String location,
+            @RequestParam(required = false) String category,
+            @RequestParam(required = false) String price
+    ) throws UnexpectedServerException {
+        return therapistProfileService.search(name, location, category, price);
+    }
 
     // It returns only approved therapists, other apis may not, clarify
     @GetMapping("/getAllTherapists")
