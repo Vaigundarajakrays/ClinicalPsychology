@@ -26,6 +26,7 @@ public interface TherapistProfileRepository extends JpaRepository<TherapistProfi
 
     boolean existsByIdAndEmail(Long id, String email);
 
+    // We are checking the null at last because of a reason. See it in docs
     @Query("""
     SELECT DISTINCT t FROM TherapistProfile t 
     JOIN t.categories c 
