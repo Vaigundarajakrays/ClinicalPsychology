@@ -39,32 +39,32 @@ public class EmailService {
             case THERAPIST_REGISTER -> {
                 subject = "Therapist Registration - Verify Your Email";
                 body = "Dear Therapist,\n\n" +
-                        "Thank you for signing up as a therapist at Therapist Boosters! Please verify your email address using the One-Time Password (OTP) below:\n\n" +
+                        "Thank you for signing up as a therapist at Clinical Psychology! Please verify your email address using the One-Time Password (OTP) below:\n\n" +
                         "OTP: " + otp + "\n\n" +
                         "This OTP is valid for 5 minutes.\n\n" +
                         "If you did not request this, please ignore this email.\n\n" +
-                        "Warm regards,\nThe Therapist Boosters Team";
+                        "Warm regards,\nThe Clinical Psychology Team";
             }
             case CLIENT_REGISTER -> {
                 subject = "Client Registration - Verify Your Email";
                 body = "Dear Client,\n\n" +
-                        "Thanks for joining Therapist Boosters! Please verify your email with the OTP below:\n\n" +
+                        "Thanks for joining Clinical Psychology! Please verify your email with the OTP below:\n\n" +
                         "OTP: " + otp + "\n\n" +
                         "This OTP is valid for 5 minutes.\n\n" +
                         "If you did not request this, please ignore this email.\n\n" +
-                        "Warm regards,\nThe Therapist Boosters Team";
+                        "Warm regards,\nThe Clinical Psychology Team";
             }
             case FORGOT_PASSWORD -> {
                 subject = "Reset Your Password";
                 body = "Hey there,\n\n" +
-                        "You requested a password reset for your Therapist Boosters account. Use the OTP below to proceed:\n\n" +
+                        "You requested a password reset for your Clinical Psychology account. Use the OTP below to proceed:\n\n" +
                         "OTP: " + otp + "\n\n" +
                         "The OTP will expire in 5 minutes.\n\n" +
                         "If you did not request this, please ignore this email.\n\n" +
-                        "Warm regards,\nThe Therapist Boosters Team";
+                        "Warm regards,\nThe Clinical Psychology Team";
             }
             default -> {
-                subject = "Therapist Boosters OTP";
+                subject = "Clinical Psychology OTP";
                 body = "Your OTP is: " + otp;
             }
         }

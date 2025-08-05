@@ -32,6 +32,7 @@ public class TherapistProfileDTO {
     private Double amount;
     private Boolean terms;
     private Boolean termsAndConditions;
+    private String location;
     private String timezone; // 👈 Needed to convert local to UTC
     private List<String> timeSlots; // 👈 List of time slot DTOs
     private AccountStatus accountStatus;

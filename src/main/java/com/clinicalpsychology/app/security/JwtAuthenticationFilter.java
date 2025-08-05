@@ -60,11 +60,13 @@ public class  JwtAuthenticationFilter extends OncePerRequestFilter {
                 UserDetails userDetails = this.userDetailsService.loadUserByUsername(username);
 
                 if (jwtService.isTokenValid(jwt, userDetails)) {
-                    UsernamePasswordAuthenticationToken authToken =
-                            new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
+
+                    UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
 
                     authToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
 
+                    // This line is safe only if we are using MODE_THREAD LOCAL which we are using it by default
+                    // If our app is Reactive and not servlet, it is better to create a new Context obj using SecurityContextHolder.createEmptyContext()
                     SecurityContextHolder.getContext().setAuthentication(authToken);
                 }
             }

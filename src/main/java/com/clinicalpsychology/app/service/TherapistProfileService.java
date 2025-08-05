@@ -75,6 +75,7 @@ public class TherapistProfileService {
                     .amount(therapistProfileDTO.getAmount())
                     .terms(therapistProfileDTO.getTerms())
                     .termsAndConditions(therapistProfileDTO.getTermsAndConditions())
+                    .location(therapistProfileDTO.getLocation())
                     .timezone(timezone)
                     .build();
 
@@ -180,6 +181,7 @@ public class TherapistProfileService {
                     .profileUrl(therapistNew.getProfileUrl())
                     .timezone(therapistNew.getTimezone())
                     .timeSlots(timeSlots)
+                    .location(therapistNew.getLocation())
                     .accountStatus(therapistNew.getAccountStatus())
                     .build();
 
@@ -218,6 +220,7 @@ public class TherapistProfileService {
             if (therapistDto.getSummary() != null) therapist.setSummary(therapistDto.getSummary());
             if (therapistDto.getAmount() != null) therapist.setAmount(therapistDto.getAmount());
             if (therapistDto.getTerms() != null) therapist.setTerms(therapistDto.getTerms());
+            if (therapistDto.getLocation() != null) therapist.setLocation(therapistDto.getLocation());
             if (therapistDto.getTermsAndConditions() != null) therapist.setTermsAndConditions(therapistDto.getTermsAndConditions());
             if (therapistDto.getTimezone() != null) therapist.setTimezone(therapistDto.getTimezone());
 
@@ -269,6 +272,7 @@ public class TherapistProfileService {
                     .terms(updatedTherapist.getTerms())
                     .termsAndConditions(updatedTherapist.getTermsAndConditions())
                     .timezone(updatedTherapist.getTimezone())
+                    .location(updatedTherapist.getLocation())
                     .timeSlots(updatedTimeSlotsStr)
                     .accountStatus(updatedTherapist.getAccountStatus())
                     .build();
