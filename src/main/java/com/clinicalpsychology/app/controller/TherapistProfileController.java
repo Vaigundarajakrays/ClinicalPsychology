@@ -9,6 +9,7 @@ import com.clinicalpsychology.app.model.TherapistProfile;
 import com.clinicalpsychology.app.response.CommonResponse;
 import com.clinicalpsychology.app.service.TherapistProfileService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -54,6 +55,11 @@ public class TherapistProfileController {
     @GetMapping("/getAllTherapists")
     public CommonResponse<List<AllTherapistsResponseDTO>> getAllTherapists() throws UnexpectedServerException {
         return therapistProfileService.getAllTherapists();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteTherapist(@PathVariable Long id) throws ResourceNotFoundException {
+        return therapistProfileService.deleteTherapist(id);
     }
 
 

@@ -27,4 +27,6 @@ public class TherapistSeederDTO {
     private String description;
     private Double amount;
     private List<String> timeSlots;
+    private List<String> education;
+    private List<String> languages;
 }

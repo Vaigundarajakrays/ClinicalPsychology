@@ -51,6 +51,22 @@ public class TherapistProfile extends BaseEntity {
     @Column(name = "category", columnDefinition = "TEXT")
     private List<String> categories;
 
+    @ElementCollection
+    @CollectionTable(
+            name = "therapist_profile_educations",
+            joinColumns = @JoinColumn(name = "therapist_profile_id")
+    )
+    @Column(name = "education", columnDefinition = "TEXT")
+    private List<String> education;
+
+    @ElementCollection
+    @CollectionTable(
+            name = "therapist_profile_languages",
+            joinColumns = @JoinColumn(name = "therapist_profile_id")
+    )
+    @Column(name = "language", columnDefinition = "TEXT")
+    private List<String> languages;
+
     @Column(nullable = false, columnDefinition = "TEXT")
     private String summary;
 

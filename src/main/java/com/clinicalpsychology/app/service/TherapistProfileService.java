@@ -18,6 +18,8 @@ import com.clinicalpsychology.app.repository.TherapistProfileRepository;
 import com.clinicalpsychology.app.repository.UsersRepository;
 import com.clinicalpsychology.app.response.CommonResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,6 +73,8 @@ public class TherapistProfileService {
                     .yearsOfExperience(therapistProfileDTO.getYearsOfExperience())
                     .password(therapistProfileDTO.getPassword()) // Will hash below
                     .categories(therapistProfileDTO.getCategories())
+                    .education(therapistProfileDTO.getEducation())
+                    .languages(therapistProfileDTO.getLanguages())
                     .summary(therapistProfileDTO.getSummary())
                     .amount(therapistProfileDTO.getAmount())
                     .terms(therapistProfileDTO.getTerms())
@@ -172,6 +176,8 @@ public class TherapistProfileService {
                     .categories(therapistNew.getCategories())
                     .linkedinUrl(therapistNew.getLinkedinUrl())
                     .terms(therapistNew.getTerms())
+                    .education(therapistNew.getEducation())
+                    .languages(therapistNew.getLanguages())
                     .summary(therapistNew.getSummary())
                     .description(therapistNew.getDescription())
                     .resumeUrl(therapistNew.getResumeUrl())
@@ -217,6 +223,8 @@ public class TherapistProfileService {
             if (therapistDto.getResumeUrl() != null) therapist.setResumeUrl(therapistDto.getResumeUrl());
             if (therapistDto.getYearsOfExperience() != null) therapist.setYearsOfExperience(therapistDto.getYearsOfExperience());
             if (therapistDto.getCategories() != null) therapist.setCategories(therapistDto.getCategories());
+            if(therapistDto.getEducation() != null) therapist.setEducation(therapistDto.getEducation());
+            if(therapistDto.getLanguages() != null) therapist.setLanguages(therapistDto.getLanguages());
             if (therapistDto.getSummary() != null) therapist.setSummary(therapistDto.getSummary());
             if (therapistDto.getAmount() != null) therapist.setAmount(therapistDto.getAmount());
             if (therapistDto.getTerms() != null) therapist.setTerms(therapistDto.getTerms());
@@ -520,6 +528,25 @@ public class TherapistProfileService {
             throw e;
         } catch (Exception e){
             throw new UnexpectedServerException("Error while loading therapists: " + e.getMessage());
+        }
+    }
+
+    @Transactional
+    public ResponseEntity<String> deleteTherapist(Long id) throws ResourceNotFoundException {
+
+        TherapistProfile therapistProfile = therapistProfileRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Therapist not found with id: " + id));
+
+        try {
+
+            usersRepository.deleteByEmailId(therapistProfile.getEmail());
+            therapistProfileRepository.deleteById(id);
+
+            return ResponseEntity.ok("Successfully deleted the therapist with id: " + id);
+
+        } catch (Exception e){
+            return ResponseEntity
+                    .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                    .body("Error while deleting therapist");
         }
     }
 }

@@ -37,5 +37,7 @@ public class TherapistProfileDTO {
     private List<String> timeSlots; // 👈 List of time slot DTOs
     private AccountStatus accountStatus;
     private ApprovalStatus approvalStatus;
+    private List<String> education;
+    private List<String> languages;
 
 }
