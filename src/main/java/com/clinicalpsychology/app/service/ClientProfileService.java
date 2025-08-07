@@ -122,9 +122,13 @@ public class ClientProfileService {
                     .name(client.getName())
                     .email(client.getEmail())
                     .phone(client.getPhone())
+                    .description(client.getDescription())
                     .languages(client.getLanguages())
                     .timezone(client.getTimeZone())
                     .profileUrl(client.getProfileUrl())
+                    .address(client.getAddress())
+                    .dob(client.getDob())
+                    .gender(client.getGender())
                     .subscriptionPlan(client.getSubscriptionPlan())
                     .customerId(client.getId())
                     .joinDate(client.getCreatedAt().atZone(ZoneId.of(client.getTimeZone())).format(formatter))
@@ -161,8 +165,12 @@ public class ClientProfileService {
             if (dto.getName() != null) client.setName(dto.getName());
             if (dto.getEmail() != null) client.setEmail(dto.getEmail());
             if (dto.getPhone() != null) client.setPhone(dto.getPhone());
+            if (dto.getDescription() != null) client.setDescription(dto.getDescription());
             if (dto.getProfileUrl() != null) client.setProfileUrl(dto.getProfileUrl());
             if (dto.getLanguages() != null) client.setLanguages(dto.getLanguages());
+            if (dto.getAddress() != null) client.setAddress(dto.getAddress());
+            if (dto.getDob() != null) client.setDob(dto.getDob());
+            if (dto.getGender() != null) client.setGender(dto.getGender());
             if (dto.getSummary() != null) client.setSummary(dto.getSummary());
             if (dto.getTimezone() != null) client.setTimeZone(dto.getTimezone());
             if (dto.getSubscriptionPlan() != null) client.setSubscriptionPlan(dto.getSubscriptionPlan());
@@ -189,6 +197,10 @@ public class ClientProfileService {
                     .industry(updated.getIndustry())
                     .summary(updated.getSummary())
                     .location(updated.getLocation())
+                    .address(updated.getAddress())
+                    .dob(updated.getDob())
+                    .gender(updated.getGender())
+                    .description(updated.getDescription())
                     .goals(updated.getGoals())
                     .status(updated.getStatus())
                     .build();
