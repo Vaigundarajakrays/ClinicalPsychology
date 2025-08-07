@@ -44,6 +44,9 @@ public class ClientProfile extends BaseEntity{
 
     private String address;
 
+    @Column(columnDefinition = "TEXT")
+    private String summary;
+
 //    @Column(nullable = false)
     private String profileUrl;
 

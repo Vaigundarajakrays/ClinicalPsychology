@@ -163,6 +163,7 @@ public class ClientProfileService {
             if (dto.getPhone() != null) client.setPhone(dto.getPhone());
             if (dto.getProfileUrl() != null) client.setProfileUrl(dto.getProfileUrl());
             if (dto.getLanguages() != null) client.setLanguages(dto.getLanguages());
+            if (dto.getSummary() != null) client.setSummary(dto.getSummary());
             if (dto.getTimezone() != null) client.setTimeZone(dto.getTimezone());
             if (dto.getSubscriptionPlan() != null) client.setSubscriptionPlan(dto.getSubscriptionPlan());
             if (dto.getIndustry() != null) client.setIndustry(dto.getIndustry());
@@ -186,6 +187,7 @@ public class ClientProfileService {
                     .customerId(updated.getId()) // Assuming customerId = id
                     .joinDate(joinDate)
                     .industry(updated.getIndustry())
+                    .summary(updated.getSummary())
                     .location(updated.getLocation())
                     .goals(updated.getGoals())
                     .status(updated.getStatus())

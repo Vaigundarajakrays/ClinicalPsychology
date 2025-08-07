@@ -21,6 +21,7 @@ public class ClientProfileDTO {
     private String password;
     private String description;
     private List<String> languages;
+    private String summary;
     private String timezone;
     private String profileUrl;
     private String subscriptionPlan;
