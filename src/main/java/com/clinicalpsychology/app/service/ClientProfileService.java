@@ -124,6 +124,7 @@ public class ClientProfileService {
                     .phone(client.getPhone())
                     .description(client.getDescription())
                     .languages(client.getLanguages())
+                    .summary(client.getSummary())
                     .timezone(client.getTimeZone())
                     .profileUrl(client.getProfileUrl())
                     .address(client.getAddress())

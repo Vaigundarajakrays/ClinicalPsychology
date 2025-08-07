@@ -21,7 +21,7 @@ public class PaymentController {
 
     private final PaymentService paymentService;
 
-    @PreAuthorize("hasAnyAuthority('ROLE_USER', 'ROLE_THERAPIST')")
+    @PreAuthorize("hasAnyAuthority('ROLE_CLIENT', 'ROLE_THERAPIST')")
     @PostMapping("/checkout")
     public CommonResponse<PaymentResponse> checkoutProducts(@RequestBody BookingDTO bookingDTO) throws StripeException, UnexpectedServerException, ResourceNotFoundException {
         return paymentService.checkoutProducts(bookingDTO);
