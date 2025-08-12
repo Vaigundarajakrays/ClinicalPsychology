@@ -494,7 +494,11 @@ public class TherapistProfileService {
                         String[] parts = priceRange.split("-");
                         minPrice = Double.parseDouble(parts[0]);
                         maxPrice = Double.parseDouble(parts[1]);
-                    } else {
+                    } else if (priceRange.endsWith("+")){
+                        // Case: price = 500+
+                        String value = priceRange.substring(0, priceRange.length() - 1);
+                        minPrice = Double.parseDouble(value);
+                    }else {
                         // Case: price = 200 (single value)
                         double price = Double.parseDouble(priceRange);
                         minPrice = price;
