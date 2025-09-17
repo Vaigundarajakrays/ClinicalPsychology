@@ -140,7 +140,7 @@ public class TherapistProfileService {
 
 
             return CommonResponse.<String>builder()
-                    .message("You have registered successfully")
+                    .message(YOU_REGISTERED_SUCCESSFULLY)
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
                     .data("Role: " + user.getRole().toString())
@@ -287,7 +287,7 @@ public class TherapistProfileService {
 
             return CommonResponse.<TherapistProfileDTO>builder()
                     .status(true)
-                    .message("You have successfully updated your profile")
+                    .message(SUCCESSFULLY_UPDATED_YOUR_PROFILE)
                     .statusCode(SUCCESS_CODE)
                     .data(responseDto)
                     .build();
@@ -505,7 +505,7 @@ public class TherapistProfileService {
                         maxPrice = price;
                     }
                 } catch (NumberFormatException e) {
-                    throw new InvalidFieldValueException("Invalid price format. Use price=1-20 or price=200");
+                    throw new InvalidFieldValueException(INVALID_PRICE_FORMAT);
                 }
             }
 
@@ -516,7 +516,7 @@ public class TherapistProfileService {
                 return CommonResponse.<List<TherapistProfile>>builder()
                         .status(STATUS_FALSE)
                         .statusCode(SUCCESS_CODE)
-                        .message("No therapists found")
+                        .message(NO_THERAPISTS_FOUND)
                         .data(List.of())
                         .build();
             }
@@ -524,14 +524,14 @@ public class TherapistProfileService {
             return CommonResponse.<List<TherapistProfile>>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message("Therapists fetched successfully")
+                    .message(THERAPISTS_FETCHED_SUCCESSFULLY)
                     .data(result)
                     .build();
 
         } catch (InvalidFieldValueException e){
             throw e;
         } catch (Exception e){
-            throw new UnexpectedServerException("Error while loading therapists: " + e.getMessage());
+            throw new UnexpectedServerException(ERROR_LOADING_THERAPISTS + e.getMessage());
         }
     }
 
@@ -545,12 +545,12 @@ public class TherapistProfileService {
             usersRepository.deleteByEmailId(therapistProfile.getEmail());
             therapistProfileRepository.deleteById(id);
 
-            return ResponseEntity.ok("Successfully deleted the therapist with id: " + id);
+            return ResponseEntity.ok(THERAPIST_DELETED_SUCCESSFULLY_WITH_ID + id);
 
         } catch (Exception e){
             return ResponseEntity
                     .status(HttpStatus.INTERNAL_SERVER_ERROR)
-                    .body("Error while deleting therapist");
+                    .body(ERROR_DELETING_THERAPIST);
         }
     }
 }

@@ -80,7 +80,7 @@ public class PaymentService {
             try {
                 zoneId = ZoneId.of(clientProfile.getTimeZone());
             } catch (DateTimeException e){
-                throw new InvalidFieldValueException("Invalid time zone");
+                throw new InvalidFieldValueException(INVALID_TIME_ZONE);
             }
 
             // Converting the booked date to utc
@@ -113,11 +113,11 @@ public class PaymentService {
                 for(Booking booking : alreadyBooked){
 
                     if (booking.getPaymentStatus() == PaymentStatus.COMPLETED) {
-                        throw new ResourceAlreadyExistsException("Slot is already booked.");
+                        throw new ResourceAlreadyExistsException(SLOT_ALREADY_BOOKED);
                     }
 
                     if (booking.getPaymentStatus() == PaymentStatus.HOLD && booking.getHoldStartTime() != null && booking.getHoldStartTime().plus(Duration.ofMinutes(15)).isAfter(Instant.now())) {
-                        throw new ResourceAlreadyExistsException("Slot is temporarily held. Try again later.");
+                        throw new ResourceAlreadyExistsException(SLOT_TEMPORARILY_HELD);
                     }
                 }
             }
@@ -184,7 +184,7 @@ public class PaymentService {
             String sessionEndStr = sessionEnd.toString();
 
             TherapistProfile therapistProfile = therapistProfileRepository.findById(bookingDTO.getTherapistId())
-                    .orElseThrow(() -> new ResourceNotFoundException("Therapist not found with ID " + bookingDTO.getTherapistId()));
+                    .orElseThrow(() -> new ResourceNotFoundException(THERAPIST_NOT_FOUND_WITH_ID + bookingDTO.getTherapistId()));
 
             //Stripe session creation
             Session session = null;
@@ -230,8 +230,8 @@ public class PaymentService {
             bookingRepository.save(savedBooking);
 
             PaymentResponse paymentResponse = PaymentResponse.builder()
-                    .status("Success")
-                    .message("Payment session created")
+                    .status(SUCCESS)
+                    .message(PAYMENT_SESSION_CREATED)
                     .sessionId(session.getId())
                     .sessionUrl(session.getUrl())
                     .build();
@@ -246,7 +246,7 @@ public class PaymentService {
         } catch (ResourceNotFoundException | ResourceAlreadyExistsException | StripeException | InvalidFieldValueException e){
             throw e; // it will catch by global exception handler
         } catch (Exception e){
-            throw new UnexpectedServerException("Error while creating payment session:" + e.getMessage());
+            throw new UnexpectedServerException(ERROR_CREATING_PAYMENT_SESSION + e.getMessage());
         }
 
 

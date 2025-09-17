@@ -49,7 +49,7 @@ public class FixedTimeSlotNewService {
         try {
             clientTimezone = ZoneId.of(timezone);
         } catch (DateTimeException e){
-            throw new InvalidFieldValueException("Invalid Timezone");
+            throw new InvalidFieldValueException(INVALID_TIMEZONE);
         }
 
         DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
@@ -59,7 +59,7 @@ public class FixedTimeSlotNewService {
         try {
             date = LocalDate.parse(localDate, dateFormatter);
         } catch (DateTimeParseException e){
-            throw new InvalidFieldValueException("Date must be yyyy-mm-dd format");
+            throw new InvalidFieldValueException(DATE_MUST_BE_YYYY_MM_DD_FORMAT);
         }
 
 

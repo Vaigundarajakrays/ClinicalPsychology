@@ -126,7 +126,7 @@ public class AdminService {
                 return CommonResponse.<List<TherapistAppointmentsDTO>>builder()
                         .status(STATUS_FALSE)
                         .statusCode(SUCCESS_CODE)
-                        .message("No therapists available")
+                        .message(NO_THERAPIST_AVAILABLE)
                         .data(List.of())
                         .build();
             }
@@ -148,7 +148,7 @@ public class AdminService {
 
                     String sessionTime = booking.getSessionStartTime().atZone(ZoneId.of(therapistProfile.getTimezone())).format(formatter);
 
-                    ClientProfile clientProfile = clientProfileRepository.findById(booking.getClientId()).orElseThrow(() -> new ResourceNotFoundException("Client not found with id: " + booking.getClientId()));
+                    ClientProfile clientProfile = clientProfileRepository.findById(booking.getClientId()).orElseThrow(() -> new ResourceNotFoundException(CLIENT_NOT_FOUND_ID + booking.getClientId()));
 
                     Instant sessionStartTime = booking.getSessionStartTime();
                     Instant sessionEndTime = sessionStartTime.plus(Duration.ofMinutes(60));
@@ -191,14 +191,14 @@ public class AdminService {
             return CommonResponse.<List<TherapistAppointmentsDTO>>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message("Loaded all therapists sessions")
+                    .message(LOADED_ALL_THERAPISTS_SESSIONS)
                     .data(therapistAppointmentsDTOS)
                     .build();
 
         } catch (ResourceNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new UnexpectedServerException("Error loading all therapists appointments: " + e.getMessage());
+            throw new UnexpectedServerException(ERROR_LOADING_THERAPISTS_APPOINTMENTS + e.getMessage());
         }
     }
 
@@ -213,7 +213,7 @@ public class AdminService {
                 return CommonResponse.<List<ClientAppointmentsDTO>>builder()
                         .status(STATUS_FALSE)
                         .statusCode(SUCCESS_CODE)
-                        .message("No clients available")
+                        .message(NO_CLIENTS_AVAILABLE)
                         .data(List.of())
                         .build();
             }
@@ -234,7 +234,7 @@ public class AdminService {
 
                     String sessionTime = booking.getSessionStartTime().atZone(ZoneId.of(clientProfile.getTimeZone())).format(formatter);
 
-                    TherapistProfile therapistProfile = therapistProfileRepository.findById(booking.getTherapistId()).orElseThrow(() -> new ResourceNotFoundException("Therapist not found with id: " + booking.getTherapistId()));
+                    TherapistProfile therapistProfile = therapistProfileRepository.findById(booking.getTherapistId()).orElseThrow(() -> new ResourceNotFoundException(THERAPIST_NOT_FOUND_ID+ booking.getTherapistId()));
 
                     Instant sessionStartTime = booking.getSessionStartTime();
                     Instant sessionEndTime = sessionStartTime.plus(Duration.ofMinutes(60));
@@ -273,14 +273,14 @@ public class AdminService {
             return CommonResponse.<List<ClientAppointmentsDTO>>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message("Loaded all clients sessions")
+                    .message(LOADED_ALL_CLIENTS_SESSIONS)
                     .data(clientAppointmentsDTOS)
                     .build();
 
         } catch (ResourceNotFoundException e) {
             throw e;
         } catch (Exception e) {
-            throw new UnexpectedServerException("Error while loading all clients sessions: " + e.getMessage());
+            throw new UnexpectedServerException(ERROR_LOADING_ALL_CLIENTS_SESSIONS + e.getMessage());
         }
 
 
@@ -297,7 +297,7 @@ public class AdminService {
                 return CommonResponse.<List<TherapistOverviewDTO>>builder()
                         .status(STATUS_FALSE)
                         .statusCode(SUCCESS_CODE)
-                        .message("No therapists available")
+                        .message(N0_THERAPIST_AVAILABLE)
                         .data(List.of())
                         .build();
             }
@@ -343,12 +343,12 @@ public class AdminService {
             return CommonResponse.<List<TherapistOverviewDTO>>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message("Loaded all therapists details")
+                    .message( LOADED_ALL_THERAPISTS_DETAILS)
                     .data(therapistOverviewDTOS)
                     .build();
 
         } catch (Exception e) {
-            throw new UnexpectedServerException("Error while loading therapists details: " + e.getMessage());
+            throw new UnexpectedServerException(ERROR_LOADING_THERAPISTS_DETAILS+ e.getMessage());
         }
 
 
@@ -365,7 +365,7 @@ public class AdminService {
                 return CommonResponse.<List<ClientOverviewDTO>>builder()
                         .status(STATUS_FALSE)
                         .statusCode(SUCCESS_CODE)
-                        .message("No clients available")
+                        .message(NO_CLIENT_AVAILABLE)
                         .data(List.of())
                         .build();
             }
@@ -411,12 +411,12 @@ public class AdminService {
             return CommonResponse.<List<ClientOverviewDTO>>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message("Loaded all clients details")
+                    .message(LOADED_ALL_CLIENTS_DETAILS)
                     .data(clientOverviewDTOS)
                     .build();
 
         } catch (Exception e) {
-            throw new UnexpectedServerException("Error while loading clients details: " + e.getMessage());
+            throw new UnexpectedServerException(ERROR_LOADING_CLIENTS_DETAILS + e.getMessage());
         }
 
     }
@@ -426,7 +426,7 @@ public class AdminService {
 
         try {
 
-            TherapistProfile therapist = therapistProfileRepository.findById(therapistId).orElseThrow(() -> new ResourceNotFoundException("Therapist not found with id: " + therapistId));
+            TherapistProfile therapist = therapistProfileRepository.findById(therapistId).orElseThrow(() -> new ResourceNotFoundException(THERAPIST_NOT_FOUND_ID + therapistId));
 
             String action = request.getStatus();
 
@@ -441,7 +441,7 @@ public class AdminService {
                 therapist.setAccountStatus(AccountStatus.INACTIVE);
 
             } else {
-                throw new InvalidFieldValueException("Action must be either approved or rejected");
+                throw new InvalidFieldValueException(ACTION_APPROVED_OR_REJECTED);
             }
 
             therapistProfileRepository.save(therapist);
@@ -500,7 +500,7 @@ public class AdminService {
         }catch (ResourceNotFoundException | InvalidFieldValueException e){
             throw e;
         }catch (Exception e){
-            throw new UnexpectedServerException("Error while approving or rejecting the therapist: " + e.getMessage());
+            throw new UnexpectedServerException( ERROR_APPROVING_OR_REJECTING_THERAPIST + e.getMessage());
         }
     }
 

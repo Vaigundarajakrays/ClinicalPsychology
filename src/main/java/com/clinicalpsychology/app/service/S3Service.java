@@ -35,9 +35,9 @@ public class S3Service {
     public CommonResponse<String> uploadFile(MultipartFile file, String folderName) throws UnexpectedServerException {
         try {
 
-            String message = "Resume uploaded successfully";
+            String message = RESUME_UPLOADED_SUCCESSFULLY;
             if(folderName.equals("client-images") || folderName.equals("therapist-images")){
-                message="Image uploaded successfully";
+                message=IMAGE_UPLOADED_SUCCESSFULLY ;
             }
             // Clean and build the S3 object key with folder path
             String originalFileName = file.getOriginalFilename();
