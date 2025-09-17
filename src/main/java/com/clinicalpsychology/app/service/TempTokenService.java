@@ -11,8 +11,7 @@ import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
 
-import static com.clinicalpsychology.app.util.Constant.STATUS_TRUE;
-import static com.clinicalpsychology.app.util.Constant.SUCCESS_CODE;
+import static com.clinicalpsychology.app.util.Constant.*;
 
 @Service
 public class TempTokenService {
@@ -37,7 +36,7 @@ public class TempTokenService {
                 return CommonResponse.<String>builder()
                         .status(STATUS_TRUE)
                         .statusCode(SUCCESS_CODE)
-                        .message("Token successfully generated")
+                        .message(TOKEN_SUCCESSFULLY_GENERATED)
                         .data(token)
                         .build();
 
@@ -56,7 +55,7 @@ public class TempTokenService {
             return CommonResponse.<String>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message("Token successfully generated")
+                    .message(TOKEN_SUCCESSFULLY_GENERATED)
                     .data(token)
                     .build();
 
@@ -70,7 +69,7 @@ public class TempTokenService {
 //        });
 
         } catch (Exception e){
-            throw new UnexpectedServerException("Error while generating token: " + e.getMessage());
+            throw new UnexpectedServerException(ERROR_GENERATING_TOKEN+ e.getMessage());
         }
 
     }

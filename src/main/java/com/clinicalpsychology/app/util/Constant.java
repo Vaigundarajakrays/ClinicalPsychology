@@ -1,6 +1,8 @@
 package com.clinicalpsychology.app.util;
 
 
+import org.checkerframework.checker.index.qual.PolyUpperBound;
+import software.amazon.awssdk.services.s3.endpoints.internal.Value;
 
 public final class Constant {
 
@@ -333,4 +335,87 @@ public final class Constant {
     public static final String INVALID_JWT_TOKEN = "Invalid or tampered JWT token.";
     public static final String INVALID_TOKEN = "INVALID_TOKEN";
 
+    //ContactMessage
+    public static final String NAME_EMAIL_SUBJECT_MESSAGE_NOT_NULL = "Name, email, subject, message should not be null";
+    public static final String SUCCESSFULLY_SENT_MESSAGE = "Successfully sent message";
+    public static final String ERROR_SENDING_MESSAGE = "Error while sending message";
+
+    //ClientBookingRescheduling
+    public static final String BOOKING_NOT_FOUND_ID = "Booking not found with id: ";
+    public static final String TIME_SLOT_NOT_FOUND_ID = "Time slot not found for this id: ";
+    public static final String BOOKED_THERAPIST_NOT_FOUND_ID = "Booked therapist not found for the id: ";
+    public static final String CLIENT_NOT_FOUND_THE_ID = "Client not found for the id: ";
+    public static final String INVALID_TIME_ZONE = "Invalid time zone";
+    public static final String SUCCESSFULLY_RESCHEDULED = "Successfully rescheduled.";
+    public static final String ERROR_RESCHEDULING_THERAPIST = "Error while rescheduling the therapist: ";
+
+    //ClientBookingCancel
+    public static final String YOUR_THERAPIST_SESSION_CANCELLED = "Your TherapistBooster Session Has Been Cancelled";
+    public static final String A_SESSION_CANCELLED = "A Session Has Been Cancelled";
+    public static final String BOOKING_CANCELLED_SUCCESSFULLY = "Booking cancelled successfully";
+    public static final String ERROR_CANCELLING_BOOKING = "Error while cancelling the booking: ";
+
+    //ClientOverview
+    public static final String NO_CLIENT_AVAILABLE = "No clients available";
+    public static final String LOADED_ALL_CLIENTS_DETAILS = "Loaded all clients details";
+    public static final String ERROR_LOADING_CLIENTS_DETAILS = "Error while loading clients details: ";
+
+    //TherapistOverview
+    public static final String N0_THERAPIST_AVAILABLE = "No therapists available";
+    public static final String LOADED_ALL_THERAPISTS_DETAILS  = "Loaded all therapists details";
+    public static final String ERROR_LOADING_THERAPISTS_DETAILS  = "Error while loading therapists details: ";
+
+    //AllClientsSessions
+    public static final String NO_CLIENTS_AVAILABLE = "No clients available";
+    public static final String LOADED_ALL_CLIENTS_SESSIONS = "Loaded all clients sessions" ;
+    public static final String ERROR_LOADING_ALL_CLIENTS_SESSIONS = "Error while loading all clients sessions: ";
+
+    //AllTherapistsSessions
+    public static final String  NO_THERAPIST_AVAILABLE = "No therapists available";
+    public static final String  LOADED_ALL_THERAPISTS_SESSIONS = "Loaded all therapists sessions";
+    public static final String ERROR_LOADING_THERAPISTS_APPOINTMENTS = "Error loading all therapists appointments: ";
+
+    //updateTherapistApprovalStatus
+    public static final String ACTION_APPROVED_OR_REJECTED = "Action must be either approved or rejected";
+    public static final String  ERROR_APPROVING_OR_REJECTING_THERAPIST = "Error while approving or rejecting the therapist: ";
+
+    //registerTherapist
+    public static final String YOU_REGISTERED_SUCCESSFULLY = "You have registered successfully";
+
+    //generateToken
+    public static final String  TOKEN_SUCCESSFULLY_GENERATED = "Token successfully generated";
+    public static final String  ERROR_GENERATING_TOKEN = "Error while generating token: ";
+
+    //SentOtp
+    public static final String ALREADY_REGISTERED_AS_THERAPIST = "You are already registered as a therapist";
+    public static final String ALREADY_REGISTERED_CLIENT_ACCOUNT_PLEASE_PROCEED_ANOTHER_ACCOUNT = "You are already registered as a client with this account. Please proceed with another account.";
+    public static final String EMAIL_ALREADY_EXISTS_SYSTEM  = "Your email already exists in our system";
+    public static final String ALREADY_REGISTERED_AS_CLIENT ="You are already registered as a client";
+    public static final String ALREADY_REGISTERED_THERAPIST_ACCOUNT_PLEASE_PROCEED_ANOTHER_ACCOUNT = "You are already registered as a therapist with this account. Please proceed with another account.";
+
+    //Search
+    public static final String NO_THERAPISTS_FOUND  = "No therapists found";
+    public static final String  THERAPISTS_FETCHED_SUCCESSFULLY = "Therapists fetched successfully";
+    public static final String ERROR_LOADING_THERAPISTS = "Error while loading therapists: ";
+    public static final String INVALID_PRICE_FORMAT ="Invalid price format. Use price=1-20 or price=200";
+    public static final String THERAPIST_DELETED_SUCCESSFULLY_WITH_ID="Successfully deleted the therapist with id: ";
+    public static final String ERROR_DELETING_THERAPIST = "Error while deleting therapis";
+
+    //updateTherapistProfile
+    public static final String SUCCESSFULLY_UPDATED_YOUR_PROFILE = "You have successfully updated your profile";
+
+    //TimeSlotsOfTherapist
+    public static final String INVALID_TIMEZONE ="Invalid Timezone";
+    public static final String  DATE_MUST_BE_YYYY_MM_DD_FORMAT ="Date must be yyyy-mm-dd format";
+
+    //CheckOutProducts
+     public static final String SLOT_ALREADY_BOOKED = "Slot is already booked.";
+     public static final String SLOT_TEMPORARILY_HELD = "Slot is temporarily held. Try again later.";
+     public static final String ERROR_CREATING_PAYMENT_SESSION = "Error while creating payment session:" ;
+     public static final String  PAYMENT_SESSION_CREATED = "Payment session created";
+     public static final String SUCCESS = "Success";
+
+     //uploadFile
+    public  static final String RESUME_UPLOADED_SUCCESSFULLY ="Resume uploaded successfully";
+    public  static final String IMAGE_UPLOADED_SUCCESSFULLY ="Image uploaded successfully";
 }

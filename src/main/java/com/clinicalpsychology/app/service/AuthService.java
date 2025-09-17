@@ -129,29 +129,29 @@ public class AuthService {
         try {
             if (otpPurpose.isTherapistRegister()) {
                 if (therapistProfileRepository.existsByEmail(email)) {
-                    throw new OtpException("You are already registered as a therapist", "THERAPIST_EXISTS");
+                    throw new OtpException(ALREADY_REGISTERED_AS_THERAPIST, "THERAPIST_EXISTS");
                 }
 
                 if (clientProfileRepository.existsByEmail(email)) {
-                    throw new OtpException("You are already registered as a client with this account. Please proceed with another account.", "CLIENT_EXISTS");
+                    throw new OtpException(ALREADY_REGISTERED_CLIENT_ACCOUNT_PLEASE_PROCEED_ANOTHER_ACCOUNT, "CLIENT_EXISTS");
                 }
 
                 if (usersRepository.existsByEmailId(email)) {
-                    throw new OtpException("Your email already exists in our system", "USER_EXISTS");
+                    throw new OtpException(EMAIL_ALREADY_EXISTS_SYSTEM, "USER_EXISTS");
                 }
             }
 
             if (otpPurpose.isClientRegister()) {
                 if (clientProfileRepository.existsByEmail(email)) {
-                    throw new OtpException("You are already registered as a client", "CLIENT_EXISTS");
+                    throw new OtpException(ALREADY_REGISTERED_AS_CLIENT, "CLIENT_EXISTS");
                 }
 
                 if (therapistProfileRepository.existsByEmail(email)) {
-                    throw new OtpException("You are already registered as a therapist with this account. Please proceed with another account.", "THERAPIST_EXISTS");
+                    throw new OtpException(ALREADY_REGISTERED_THERAPIST_ACCOUNT_PLEASE_PROCEED_ANOTHER_ACCOUNT, "THERAPIST_EXISTS");
                 }
 
                 if (usersRepository.existsByEmailId(email)) {
-                    throw new OtpException("Your email already exists in our system", "USER_EXISTS");
+                    throw new OtpException(EMAIL_ALREADY_EXISTS_SYSTEM, "USER_EXISTS");
                 }
             }
 

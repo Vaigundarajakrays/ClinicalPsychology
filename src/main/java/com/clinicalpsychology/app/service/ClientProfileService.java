@@ -96,7 +96,7 @@ public class ClientProfileService {
 
             return CommonResponse.<ClientProfile>builder()
                     .status(true)
-                    .message("You have registered successfully")
+                    .message(YOU_REGISTERED_SUCCESSFULLY)
                     .statusCode(SUCCESS_CODE)
                     .data(savedClient)
                     .build();
@@ -209,7 +209,7 @@ public class ClientProfileService {
             return CommonResponse.<ClientProfileDTO>builder()
                     .status(true)
                     .statusCode(200)
-                    .message("You have successfully updated your profile")
+                    .message(SUCCESSFULLY_UPDATED_YOUR_PROFILE)
                     .data(responseDto)
                     .build();
 
@@ -299,13 +299,13 @@ public class ClientProfileService {
 
         try {
 
-            Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new ResourceNotFoundException("Booking not found with id: " + bookingId));
+            Booking booking = bookingRepository.findById(bookingId).orElseThrow(() -> new ResourceNotFoundException(BOOKING_NOT_FOUND_ID + bookingId));
 
-            FixedTimeSlotNew currentSlot = fixedTimeSlotNewRepository.findById(rescheduleDTO.getTimeSlotId()).orElseThrow(() -> new ResourceNotFoundException("Time slot not found for this id: " + rescheduleDTO.getTimeSlotId()));
+            FixedTimeSlotNew currentSlot = fixedTimeSlotNewRepository.findById(rescheduleDTO.getTimeSlotId()).orElseThrow(() -> new ResourceNotFoundException( TIME_SLOT_NOT_FOUND_ID + rescheduleDTO.getTimeSlotId()));
 
-            TherapistProfile therapistProfile = therapistNewRepository.findById(booking.getTherapistId()).orElseThrow(() -> new ResourceNotFoundException("Booked therapist not found for the id: " + booking.getTherapistId()));
+            TherapistProfile therapistProfile = therapistNewRepository.findById(booking.getTherapistId()).orElseThrow(() -> new ResourceNotFoundException( BOOKED_THERAPIST_NOT_FOUND_ID + booking.getTherapistId()));
 
-            ClientProfile clientProfile = clientProfileRepository.findById(booking.getClientId()).orElseThrow(() -> new ResourceNotFoundException("Client not found for the id: " + booking.getClientId()));
+            ClientProfile clientProfile = clientProfileRepository.findById(booking.getClientId()).orElseThrow(() -> new ResourceNotFoundException(CLIENT_NOT_FOUND_THE_ID + booking.getClientId()));
 
             var dateFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
@@ -320,7 +320,7 @@ public class ClientProfileService {
             try {
                 zoneId = ZoneId.of(clientProfile.getTimeZone());
             } catch (DateTimeException e) {
-                throw new InvalidFieldValueException("Invalid time zone");
+                throw new InvalidFieldValueException(INVALID_TIME_ZONE);
             }
 
             Instant bookingDate = date.atStartOfDay(zoneId).toInstant();
@@ -365,7 +365,7 @@ public class ClientProfileService {
 
             return CommonResponse.<ClientDashboardDTO>builder()
                     .statusCode(SUCCESS_CODE)
-                    .message("Successfully rescheduled.")
+                    .message(SUCCESSFULLY_RESCHEDULED)
                     .data(clientDashboard)
                     .status(STATUS_TRUE)
                     .build();
@@ -375,7 +375,7 @@ public class ClientProfileService {
         } catch (ResourceNotFoundException | InvalidFieldValueException e){
             throw e;
         } catch (Exception e){
-            throw new UnexpectedServerException("Error while rescheduling the therapist: " + e.getMessage());
+            throw new UnexpectedServerException(ERROR_RESCHEDULING_THERAPIST + e.getMessage());
         }
 
 
@@ -386,13 +386,13 @@ public class ClientProfileService {
 
         try {
 
-            Booking booking = bookingRepository.findById(bookingId).orElseThrow(()-> new ResourceNotFoundException("Booking not found with id: " + bookingId));
+            Booking booking = bookingRepository.findById(bookingId).orElseThrow(()-> new ResourceNotFoundException(BOOKING_NOT_FOUND_ID + bookingId));
 
-            FixedTimeSlotNew currentSlot = fixedTimeSlotNewRepository.findById(booking.getTimeSlotId()).orElseThrow(() -> new ResourceNotFoundException("Time slot not found for this id: " + booking.getTimeSlotId()));
+            FixedTimeSlotNew currentSlot = fixedTimeSlotNewRepository.findById(booking.getTimeSlotId()).orElseThrow(() -> new ResourceNotFoundException(TIME_SLOT_NOT_FOUND_ID + booking.getTimeSlotId()));
 
-            TherapistProfile therapistProfile = therapistNewRepository.findById(booking.getTherapistId()).orElseThrow(() -> new ResourceNotFoundException("Booked therapist not found for the id: " + booking.getTherapistId()));
+            TherapistProfile therapistProfile = therapistNewRepository.findById(booking.getTherapistId()).orElseThrow(() -> new ResourceNotFoundException(BOOKED_THERAPIST_NOT_FOUND_ID + booking.getTherapistId()));
 
-            ClientProfile clientProfile = clientProfileRepository.findById(booking.getClientId()).orElseThrow(() -> new ResourceNotFoundException("Client not found for the id: " + booking.getClientId()));
+            ClientProfile clientProfile = clientProfileRepository.findById(booking.getClientId()).orElseThrow(() -> new ResourceNotFoundException(CLIENT_NOT_FOUND_THE_ID + booking.getClientId()));
 
             var formatter = DateTimeFormatter.ofPattern("MMMM dd, yyyy 'at' hh:mm a z");
             String sessionStartForClient = formatter.withZone(ZoneId.of(clientProfile.getTimeZone())).format(booking.getSessionStartTime());
@@ -421,8 +421,8 @@ public class ClientProfileService {
                 """, therapistProfile.getName(), clientProfile.getName(), sessionStartForTherapist);
 
             // Send emails
-            emailService.sendEmail(clientProfile.getEmail(), "Your TherapistBooster Session Has Been Cancelled", clientEmailBody);
-            emailService.sendEmail(therapistProfile.getEmail(), "A Session Has Been Cancelled", therapistEmailBody);
+            emailService.sendEmail(clientProfile.getEmail(), YOUR_THERAPIST_SESSION_CANCELLED, clientEmailBody);
+            emailService.sendEmail(therapistProfile.getEmail(), A_SESSION_CANCELLED , therapistEmailBody);
 
             bookingRepository.deleteById(bookingId);
 
@@ -431,11 +431,11 @@ public class ClientProfileService {
             return CommonResponse.<String>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message("Booking cancelled successfully")
+                    .message(BOOKING_CANCELLED_SUCCESSFULLY)
                     .build();
 
         } catch (Exception e){
-            throw new UnexpectedServerException("Error while cancelling the booking: " + e.getMessage());
+            throw new UnexpectedServerException( ERROR_CANCELLING_BOOKING + e.getMessage());
         }
 
         // In future if needed to refund
