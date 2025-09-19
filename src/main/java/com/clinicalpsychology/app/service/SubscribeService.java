@@ -1,8 +1,8 @@
 package com.clinicalpsychology.app.service;
 
 import com.clinicalpsychology.app.dto.SubscribeResponseDTO;
-import com.clinicalpsychology.app.enumUtil.Role;
-import com.clinicalpsychology.app.enumUtil.SubscribeStatus;
+import com.clinicalpsychology.app.enums.Role;
+import com.clinicalpsychology.app.enums.SubscribeStatus;
 import com.clinicalpsychology.app.exceptionHandling.ResourceAlreadyExistsException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
 import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
@@ -31,11 +31,7 @@ public class SubscribeService {
 
         try {
 
-            Users user = usersRepository.findByEmailId(email);
-
-            if (user == null) {
-                throw new ResourceNotFoundException("User not found with email: " + email);
-            }
+            Users user = usersRepository.findByEmailId(email).orElseThrow(() -> new ResourceNotFoundException("User not found with email: " + email));
 
             // Double check
             if(user.getRole()== Role.THERAPIST){

@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.seed;
 
-import com.clinicalpsychology.app.enumUtil.Role;
+import com.clinicalpsychology.app.enums.Role;
 import com.clinicalpsychology.app.model.Users;
 import com.clinicalpsychology.app.repository.UsersRepository;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +20,9 @@ public class AdminSeeder implements CommandLineRunner {
     @Override
     public void run(String... args) {
 
-        boolean exists = usersRepository.existsByEmailId("admin@gmail.com");
+        String adminEmail = "admin@gmail.com";
+
+        boolean exists = usersRepository.existsByEmailId(adminEmail);
 
         if(!exists){
 
@@ -29,7 +31,7 @@ public class AdminSeeder implements CommandLineRunner {
                 String hashedPassword = passwordEncoder.encode(password);
 
                 Users user = Users.builder()
-                        .emailId("admin@gmail.com")
+                        .emailId(adminEmail)
                         .password(hashedPassword)
                         .role(Role.ADMIN)
                         .build();
@@ -41,7 +43,7 @@ public class AdminSeeder implements CommandLineRunner {
             }
 
         } else {
-            log.warn("⚠️ Admin with email {} already exists. Skipping seeding.", "admin@gmail.com");
+            log.warn("⚠️ Admin with email {} already exists. Skipping seeding.", adminEmail);
         }
 
 

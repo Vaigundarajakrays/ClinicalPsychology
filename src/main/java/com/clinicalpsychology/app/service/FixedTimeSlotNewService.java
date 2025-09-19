@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.service;
 
 import com.clinicalpsychology.app.dto.TimeSlotDTO;
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
 import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
 import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;

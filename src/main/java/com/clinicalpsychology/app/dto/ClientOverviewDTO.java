@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.dto;
 
-import com.clinicalpsychology.app.enumUtil.AccountStatus;
+import com.clinicalpsychology.app.enums.AccountStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

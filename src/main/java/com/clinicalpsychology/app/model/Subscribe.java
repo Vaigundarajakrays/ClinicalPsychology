@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.model;
 
-import com.clinicalpsychology.app.enumUtil.Role;
-import com.clinicalpsychology.app.enumUtil.SubscribeStatus;
+import com.clinicalpsychology.app.enums.Role;
+import com.clinicalpsychology.app.enums.SubscribeStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

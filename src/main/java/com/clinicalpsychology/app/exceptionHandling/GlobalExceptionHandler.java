@@ -15,11 +15,14 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.multipart.MaxUploadSizeExceededException;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
+import java.util.Map;
 
 import static com.clinicalpsychology.app.util.Constant.*;
 
@@ -62,6 +65,17 @@ public class GlobalExceptionHandler {
                 LocalDateTime.now()
         );
         return new ResponseEntity<>(error, HttpStatus.CONFLICT); // 409 Conflict
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<Map<String, String>> handleValidationErrors(MethodArgumentNotValidException ex) {
+        Map<String, String> errors = new HashMap<>();
+
+        ex.getBindingResult().getFieldErrors().forEach(error ->
+                errors.put(error.getField(), error.getDefaultMessage())
+        );
+
+        return new ResponseEntity<>(errors, HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(OtpException.class)
@@ -161,26 +175,10 @@ public class GlobalExceptionHandler {
 //    }
 
     // Exception Handling for login (Authentication)
-    @ExceptionHandler(UsernameNotFoundException.class)
-    public ResponseEntity<?> handleUserNotFoundException(UsernameNotFoundException ex) {
-        ErrorResponse errorResponse=
-                new ErrorResponse(ex.getMessage()
-                        ,USER_NOT_FOUND,STATUS_FALSE, LocalDateTime.now());
-        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
-    }
-
     @ExceptionHandler(BadCredentialsException.class)
     public ResponseEntity<?> handleBadCredentialException(BadCredentialsException ex) {
         ErrorResponse errorResponse=
-                new ErrorResponse(INCORRECT_PASSWORD
-                        ,ex.getMessage(),STATUS_FALSE, LocalDateTime.now());
-        return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
-    }
-
-    @ExceptionHandler(AuthenticationException.class)
-    public ResponseEntity<?> handleAuthenticationException(AuthenticationException ex) {
-        ErrorResponse errorResponse=
-                new ErrorResponse(AUTHENTICATION_FAILED
+                new ErrorResponse(INVALID_USERNAME_PASSWORD
                         ,ex.getMessage(),STATUS_FALSE, LocalDateTime.now());
         return new ResponseEntity<>(errorResponse, HttpStatus.UNAUTHORIZED);
     }

@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.controller;
 
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
 import com.clinicalpsychology.app.payment.StripeWebhookHandlerService;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;

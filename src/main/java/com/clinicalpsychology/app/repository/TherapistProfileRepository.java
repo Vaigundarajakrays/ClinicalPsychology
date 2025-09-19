@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.repository;
 
-import com.clinicalpsychology.app.enumUtil.AccountStatus;
-import com.clinicalpsychology.app.enumUtil.ApprovalStatus;
+import com.clinicalpsychology.app.enums.AccountStatus;
+import com.clinicalpsychology.app.enums.ApprovalStatus;
 import com.clinicalpsychology.app.model.TherapistProfile;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

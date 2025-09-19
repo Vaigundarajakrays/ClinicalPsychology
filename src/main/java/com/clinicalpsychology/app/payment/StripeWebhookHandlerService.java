@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.payment;
 
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
-import com.clinicalpsychology.app.enumUtil.ZoomContextType;
+import com.clinicalpsychology.app.enums.PaymentStatus;
+import com.clinicalpsychology.app.enums.ZoomContextType;
 import com.clinicalpsychology.app.model.Booking;
 import com.clinicalpsychology.app.repository.BookingRepository;
 import com.clinicalpsychology.app.zoom.ZoomMeetingResponse;

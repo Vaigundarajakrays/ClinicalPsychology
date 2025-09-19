@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.repository;
 
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
 import com.clinicalpsychology.app.model.Booking;
 import org.springframework.data.jpa.repository.JpaRepository;
 

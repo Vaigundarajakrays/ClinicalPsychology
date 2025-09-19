@@ -3,10 +3,10 @@ package com.clinicalpsychology.app.service;
 import com.clinicalpsychology.app.dto.AllTherapistsResponseDTO;
 import com.clinicalpsychology.app.dto.TherapistDashboardDTO;
 import com.clinicalpsychology.app.dto.TherapistProfileDTO;
-import com.clinicalpsychology.app.enumUtil.AccountStatus;
-import com.clinicalpsychology.app.enumUtil.ApprovalStatus;
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
-import com.clinicalpsychology.app.enumUtil.Role;
+import com.clinicalpsychology.app.enums.AccountStatus;
+import com.clinicalpsychology.app.enums.ApprovalStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
+import com.clinicalpsychology.app.enums.Role;
 import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceAlreadyExistsException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
@@ -29,7 +29,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import static com.clinicalpsychology.app.util.Constant.*;
 

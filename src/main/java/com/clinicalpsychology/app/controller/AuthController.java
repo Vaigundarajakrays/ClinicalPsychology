@@ -3,7 +3,7 @@ package com.clinicalpsychology.app.controller;
 import com.clinicalpsychology.app.dto.ChangePasswordRequest;
 import com.clinicalpsychology.app.dto.LoginRequest;
 import com.clinicalpsychology.app.dto.LoginResponse;
-import com.clinicalpsychology.app.enumUtil.OtpPurpose;
+import com.clinicalpsychology.app.enums.OtpPurpose;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
 import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
 import com.clinicalpsychology.app.model.Users;
@@ -11,6 +11,7 @@ import com.clinicalpsychology.app.response.CommonResponse;
 import com.clinicalpsychology.app.service.AuthService;
 import com.clinicalpsychology.app.service.UsersService;
 import jakarta.validation.Valid;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -30,6 +31,7 @@ public class AuthController {
 //        return usersService.signUp(users);
 //    }
 
+    @PreAuthorize("hasRole('ADMIN')")
     @PostMapping("/adminSignUp")
     public CommonResponse<Users> adminCreate(@RequestBody Users users) throws UnexpectedServerException {
         return usersService.adminCreate(users);

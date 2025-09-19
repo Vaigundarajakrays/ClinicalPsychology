@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.service;
 
-import com.clinicalpsychology.app.enumUtil.OtpPurpose;
+import com.clinicalpsychology.app.enums.OtpPurpose;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;

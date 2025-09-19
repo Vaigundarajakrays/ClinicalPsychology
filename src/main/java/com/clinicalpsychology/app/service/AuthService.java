@@ -3,8 +3,8 @@ package com.clinicalpsychology.app.service;
 import com.clinicalpsychology.app.dto.ChangePasswordRequest;
 import com.clinicalpsychology.app.dto.LoginRequest;
 import com.clinicalpsychology.app.dto.LoginResponse;
-import com.clinicalpsychology.app.enumUtil.OtpPurpose;
-import com.clinicalpsychology.app.enumUtil.Role;
+import com.clinicalpsychology.app.enums.OtpPurpose;
+import com.clinicalpsychology.app.enums.Role;
 import com.clinicalpsychology.app.exceptionHandling.OtpException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
 import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
@@ -21,12 +21,11 @@ import org.springframework.mail.MailSendException;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import static com.clinicalpsychology.app.util.Constant.*;
 
@@ -49,16 +48,13 @@ public class AuthService {
 
     public CommonResponse<LoginResponse> authenticate(LoginRequest request) throws UnexpectedServerException, ResourceNotFoundException {
 
-        Users user = usersRepository.findByEmailId(request.getEmailId());
-
-        if (user == null) {
-            throw new ResourceNotFoundException(USER_NOT_FOUND_WITH_EMAIL + request.getEmailId());
-        }
-
         try {
-            authenticationManager.authenticate(
+
+            Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(request.getEmailId(), request.getPassword())
             );
+
+            Users user = (Users) auth.getPrincipal();
 
             String token = jwtService.generateToken(user);
 
@@ -67,8 +63,6 @@ public class AuthService {
             String timezone = null;
             String profileUrl = null;
             boolean isSubscribed = false;
-
-            var formatter = DateTimeFormatter.ofPattern("MMM dd, yyyy");
 
             if (user.getRole() == Role.CLIENT) {
                 ClientProfile client = clientProfileRepository.findByEmail(user.getEmailId())
@@ -87,10 +81,10 @@ public class AuthService {
 
             if (user.getRole() == Role.THERAPIST) {
                 TherapistProfile therapist = therapistProfileRepository.findByEmail(user.getEmailId())
-                        .orElseThrow(() -> new ResourceNotFoundException(CLIENT_NOT_FOUND_EMAIL + user.getEmailId()));
+                        .orElseThrow(() -> new ResourceNotFoundException(THERAPIST_NOT_FOUND_EMAIL + user.getEmailId()));
 
                 Subscribe subscribe = subscribeRepository.findByEmail(therapist.getEmail());
-                if(!(subscribe ==null)){
+                if(subscribe != null){
                     isSubscribed=true;
                 }
 
@@ -117,7 +111,7 @@ public class AuthService {
                     .statusCode(SUCCESS_CODE)
                     .build();
 
-        } catch (UsernameNotFoundException | BadCredentialsException e) {
+        } catch (BadCredentialsException | ResourceNotFoundException e) {
             throw e;
         } catch (Exception e) {
             throw new UnexpectedServerException(ERROR_LOGGING_IN + e.getMessage());
@@ -244,11 +238,7 @@ public class AuthService {
 
     public CommonResponse<String> changePassword(ChangePasswordRequest changePasswordRequest) throws ResourceNotFoundException, UnexpectedServerException {
 
-        Users user = usersRepository.findByEmailId(changePasswordRequest.getEmail());
-
-        if(user == null){
-            throw new ResourceNotFoundException(USER_NOT_FOUND_WITH_EMAIL + changePasswordRequest.getEmail());
-        }
+        Users user = usersRepository.findByEmailId(changePasswordRequest.getEmail()).orElseThrow(() -> new ResourceNotFoundException(USER_NOT_FOUND_WITH_EMAIL + changePasswordRequest.getEmail()));
 
         try {
 

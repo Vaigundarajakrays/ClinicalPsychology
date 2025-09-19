@@ -1,9 +1,9 @@
 package com.clinicalpsychology.app.service;
 
 import com.clinicalpsychology.app.dto.*;
-import com.clinicalpsychology.app.enumUtil.AccountStatus;
-import com.clinicalpsychology.app.enumUtil.ApprovalStatus;
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
+import com.clinicalpsychology.app.enums.AccountStatus;
+import com.clinicalpsychology.app.enums.ApprovalStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
 import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
 import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
@@ -105,12 +105,12 @@ public class AdminService {
             return CommonResponse.<AdminDashboardDTO>builder()
                     .status(STATUS_TRUE)
                     .statusCode(SUCCESS_CODE)
-                    .message(ADMIN_DASHBOARD_DETAILS_SUCCESSFULLY)
+                    .message(LOADED_ADMIN_DASHBOARD_DETAILS)
                     .data(adminDashboard)
                     .build();
 
         } catch (Exception e) {
-            throw new UnexpectedServerException(ERROR_ADMIN_DASHBOARD_DETAILS + e.getMessage());
+            throw new UnexpectedServerException(ERROR_LOADING_ADMIN_DASHBOARD_DETAILS + e.getMessage());
         }
 
     }

@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.enumUtil;
+package com.clinicalpsychology.app.enums;
 
 import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
 

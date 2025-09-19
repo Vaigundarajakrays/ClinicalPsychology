@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.dto;
 
-import com.clinicalpsychology.app.enumUtil.AccountStatus;
-import com.clinicalpsychology.app.enumUtil.ApprovalStatus;
+import com.clinicalpsychology.app.enums.AccountStatus;
+import com.clinicalpsychology.app.enums.ApprovalStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

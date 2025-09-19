@@ -1,9 +1,5 @@
 package com.clinicalpsychology.app.util;
 
-
-import org.checkerframework.checker.index.qual.PolyUpperBound;
-import software.amazon.awssdk.services.s3.endpoints.internal.Value;
-
 public final class Constant {
 
     private Constant(){
@@ -176,6 +172,7 @@ public final class Constant {
 
     //Auth controller errors
     public static final String CLIENT_NOT_FOUND_EMAIL="Client not found with this email: ";
+    public static final String THERAPIST_NOT_FOUND_EMAIL="Therapist not found with this email: ";
     public static final String INVALID_OTP="Invalid OTP";
     public static final String IN_VALID_OTP="INVALID_OTP";
     public static final String OTP_EXPIRED="OTP expired";
@@ -184,11 +181,11 @@ public final class Constant {
 
     // Admin controller messages
     public static final String THERAPISTS_NOT_FOUND="No therapists found";
-    public static final String ADMIN_DASHBOARD_DETAILS_SUCCESSFULLY="Loaded admin dashboard details successfully";
+    public static final String LOADED_ADMIN_DASHBOARD_DETAILS ="Loaded admin dashboard details successfully";
 
 
     // Admin controller errors
-    public static String ERROR_ADMIN_DASHBOARD_DETAILS="Error while loading admin dashboard details:";
+    public static String ERROR_LOADING_ADMIN_DASHBOARD_DETAILS ="Error while loading admin dashboard details:";
 
 
     // Fixed Time Slot New Service Messages
@@ -223,7 +220,7 @@ public final class Constant {
     public static final String AUTHENTICATION_ERROR = "Authentication Error";
     public static final String AUTHENTICATION_FAILED = "Authentication failed";
     public static final String USER_NOT_FOUND = "User not found";
-    public static final String INCORRECT_PASSWORD = "Incorrect password";
+    public static final String INVALID_USERNAME_PASSWORD = "Invalid username or password";
     public static final String ERROR = "Error occured";
 
     // Email Errors

@@ -1,8 +1,8 @@
 package com.clinicalpsychology.app.seed;
 
-import com.clinicalpsychology.app.enumUtil.AccountStatus;
-import com.clinicalpsychology.app.enumUtil.ApprovalStatus;
-import com.clinicalpsychology.app.enumUtil.Role;
+import com.clinicalpsychology.app.enums.AccountStatus;
+import com.clinicalpsychology.app.enums.ApprovalStatus;
+import com.clinicalpsychology.app.enums.Role;
 import com.clinicalpsychology.app.model.FixedTimeSlotNew;
 import com.clinicalpsychology.app.model.TherapistProfile;
 import com.clinicalpsychology.app.model.Users;
@@ -46,7 +46,7 @@ public class TherapistSeeder implements CommandLineRunner {
                         .categories(List.of("Anxiety", "Depression", "CBT"))
                         .summary("Dr. Sarah Johnson is a licensed clinical psychologist with over 8 years of experience in treating anxiety disorders, depression, and trauma. She specializes in Cognitive Behavioral Therapy (CBT) and has helped hundreds of clients overcome their mental health challenges. Dr. Johnson received her Ph.D. in Clinical Psychology from Columbia University and completed her internship at Mount Sinai Hospital.")
                         .description("Specializing in cognitive behavioral therapy with a focus on anxiety and depression. I believe in creating a safe, non-judgmental space where clients can explore their thoughts and emotions.")
-                        .amount(2500.0)
+                        .amount(600.0)
                         .languages(List.of("English","Tamil"))
                         .education(List.of("Ph.D. in Clinical Psychology - Columbia University","M.A. in Psychology - New York University", "B.A. in Psychology - Harvard University"))
                         .timeSlots(List.of("18:00", "15:00"))
@@ -69,7 +69,7 @@ public class TherapistSeeder implements CommandLineRunner {
                         ))
                         .summary("Dr. Michael Chen is a highly respected trauma and PTSD specialist with over 12 years of clinical experience across North America. Holding advanced certifications in EMDR and trauma-informed therapy, Dr. Chen has worked extensively with individuals, veterans, and corporate professionals dealing with post-traumatic stress and emotional resilience. He is deeply rooted in evidence-based practices and combines neuroscience with compassionate therapy to enable deep healing. A graduate in Clinical Psychology and trained across leading mental health institutions in Canada and the U.S., Dr. Chen brings a unique East-meets-West approach to his sessions.")
                         .description("Licensed clinical psychologist with extensive experience in trauma therapy and EMDR. I work with individuals who have experienced various forms of hardships")
-                        .amount(3000.0)
+                        .amount(300.0)
                         .timeSlots(List.of("17:00", "20:00"))
                         .build(),
 
@@ -90,7 +90,7 @@ public class TherapistSeeder implements CommandLineRunner {
                         .categories(List.of("Anxiety", "Women’s Mental Health", "Mindfulness"))
                         .summary("Dr. Aisha Williams is a renowned clinical psychologist with 15 years of experience specializing in anxiety management, women’s mental health, and mindfulness-based cognitive therapy. With a doctorate in Psychology from Columbia University, Dr. Williams has empowered thousands of individuals—especially women navigating transitions, burnout, or high-functioning anxiety—to reclaim their calm and confidence. Her work integrates mindfulness, somatic practices, and deep cognitive restructuring to foster emotional well-being and self-awareness. Based in New York, she offers a warm, judgment-free therapeutic space, blending science-backed strategies with soulful presence.")
                         .description("Board-certified clinical psychologist passionate about helping women and professionals manage anxiety, stress, and emotional overload through mindfulness, talk therapy, and empowerment strategies.")
-                        .amount(3500.0)
+                        .amount(500.0)
                         .timeSlots(List.of("09:00", "13:00", "18:30"))
                         .build()
 

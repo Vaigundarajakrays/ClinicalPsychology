@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.dto;
 
-import com.clinicalpsychology.app.enumUtil.Role;
+import com.clinicalpsychology.app.enums.Role;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.model;
 
-import com.clinicalpsychology.app.enumUtil.AccountStatus;
-import com.clinicalpsychology.app.enumUtil.ApprovalStatus;
+import com.clinicalpsychology.app.enums.AccountStatus;
+import com.clinicalpsychology.app.enums.ApprovalStatus;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.*;
@@ -13,7 +13,6 @@ import java.util.List;
 @Builder
 @Data
 @Entity
-@Table(name = "therapist_new")
 @EqualsAndHashCode(callSuper = true)
 public class TherapistProfile extends BaseEntity {
 

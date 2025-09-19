@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.model;
 
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

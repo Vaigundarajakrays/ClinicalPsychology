@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.payment;
 
 import com.clinicalpsychology.app.dto.BookingDTO;
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
 import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceAlreadyExistsException;
 import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;

@@ -3,10 +3,12 @@ package com.clinicalpsychology.app.repository;
 import com.clinicalpsychology.app.model.Users;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.Optional;
+
 public interface UsersRepository extends JpaRepository<Users, Long> {
     boolean existsByEmailId(String emailId);
 
-    Users findByEmailId(String email);
+    Optional<Users> findByEmailId(String email);
 
     void deleteByEmailId(String email);
 

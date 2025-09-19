@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.enumUtil;
+package com.clinicalpsychology.app.enums;
 
 // enum by default static and final
 // Enums can have methods, fields, and constructors

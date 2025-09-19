@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.payment;
 
-import com.clinicalpsychology.app.enumUtil.PaymentStatus;
+import com.clinicalpsychology.app.enums.PaymentStatus;
 import com.clinicalpsychology.app.model.Booking;
 import com.clinicalpsychology.app.repository.BookingRepository;
 import lombok.RequiredArgsConstructor;

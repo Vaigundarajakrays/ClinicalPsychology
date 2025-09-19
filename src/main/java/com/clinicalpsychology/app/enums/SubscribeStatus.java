@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.enumUtil;
+package com.clinicalpsychology.app.enums;
 
 public enum SubscribeStatus {
     SUBSCRIBED,

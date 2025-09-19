@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.zoom;
 
-import com.clinicalpsychology.app.enumUtil.ZoomContextType;
+import com.clinicalpsychology.app.enums.ZoomContextType;
 import com.clinicalpsychology.app.service.EmailService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
