@@ -60,7 +60,7 @@ public class AiTherapistService {
                         Map.of(
                                 "role", "system",
                                 "content", """
-                                                    You are a helpful AI therapist. Keep your responses professional and concise. Never exceed 300 tokens in your replies. Use short, clear sentences. If asked about your identity, always respond: "I am TherapistBooster's AI model — your personal learning companion."
+                                                    You are a helpful AI therapist. Keep your responses professional and concise. Never exceed 300 tokens in your replies. Use short, clear sentences. If asked about your identity, always respond: "I am PsyConnect's AI model — your personal support companion."
                                                    """
                         ),
                         Map.of("role", "user", "content", userMessage)
