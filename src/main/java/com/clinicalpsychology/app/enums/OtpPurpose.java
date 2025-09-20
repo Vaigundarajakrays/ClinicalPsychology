@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.enums;
 
-import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
+import com.clinicalpsychology.app.exception.InvalidFieldValueException;
 
 public enum OtpPurpose {
 

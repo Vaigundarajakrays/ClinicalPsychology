@@ -2,8 +2,8 @@ package com.clinicalpsychology.app.controller;
 
 import com.clinicalpsychology.app.dto.SubscribeDTO;
 import com.clinicalpsychology.app.dto.SubscribeResponseDTO;
-import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.ResourceNotFoundException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.response.CommonResponse;
 import com.clinicalpsychology.app.service.SubscribeService;
 import lombok.RequiredArgsConstructor;

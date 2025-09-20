@@ -1,6 +1,6 @@
-package com.clinicalpsychology.app.service;
+package com.clinicalpsychology.app.aitherapist;
 
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.response.CommonResponse;
 import org.springframework.stereotype.Service;
 
@@ -84,9 +84,9 @@ public class TempTokenService {
     }
 
     public String getUsername(String token) {
-        TempToken temp = tokenStore.get(token);
-        return (temp != null && temp.expiry().isAfter(Instant.now())) ? temp.username() : null;
+        return tokenStore.get(token).username();
     }
+
 
     // Optional cleanup method for expired tokens (can run as scheduled task)
     public void cleanupExpiredTokens() {

@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.controller;
 
-import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.InvalidFieldValueException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.response.CommonResponse;
 import com.clinicalpsychology.app.service.S3Service;
 import lombok.RequiredArgsConstructor;

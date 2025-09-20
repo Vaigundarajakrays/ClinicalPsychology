@@ -1,7 +1,10 @@
 package com.clinicalpsychology.app.controller;
 
+import com.clinicalpsychology.app.aitherapist.AiChatPaymentService;
 import com.clinicalpsychology.app.enums.PaymentStatus;
 import com.clinicalpsychology.app.payment.StripeWebhookHandlerService;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
 import com.stripe.net.Webhook;
@@ -22,6 +25,8 @@ public class StripeWebhookController {
     private String endpointSecret;
 
     private final StripeWebhookHandlerService stripeWebhookHandlerService;
+    private final ObjectMapper objectMapper;
+    private final AiChatPaymentService aiChatPaymentService;
 
     private static final Logger logger = LoggerFactory.getLogger(StripeWebhookController.class);
 
@@ -47,18 +52,51 @@ public class StripeWebhookController {
         String eventType = event.getType();
         logger.info("Received Stripe event: {}", eventType);
 
+        String purchaseType = null;
+
+        try {
+            JsonNode data = objectMapper.readTree(event.getData().getObject().toJson());
+            purchaseType = data.get("metadata").get("purchaseType").asText();
+        } catch (Exception e) {
+            logger.info("Unable to get session id or purchase type from webhook payload");
+        }
+
         switch (eventType) {
             case "checkout.session.completed":
             case "checkout.session.async_payment_succeeded":
-                stripeWebhookHandlerService.handleSessionEventAsync(event, PaymentStatus.COMPLETED);
+                if(purchaseType != null){
+                    if("book-therapist".equalsIgnoreCase(purchaseType)){
+                        logger.info("🔄 Processing completed payment for book therapist");
+                        stripeWebhookHandlerService.handleSessionEventAsync(event, PaymentStatus.COMPLETED);
+                    } else if ("ai-chat".equalsIgnoreCase(purchaseType)) {
+                        logger.info("🔄 Processing completed payment for ai chat");
+                        aiChatPaymentService.handleSessionEventAsync(event, PaymentStatus.COMPLETED);
+                    }
+                }
                 break;
 
             case "checkout.session.expired":
-                stripeWebhookHandlerService.handleSessionEventAsync(event, PaymentStatus.EXPIRED);
+                if (purchaseType != null) {
+                    if ("book-therapist".equalsIgnoreCase(purchaseType)) {
+                        logger.info("⚠️ Payment expired for book therapist");
+                        stripeWebhookHandlerService.handleSessionEventAsync(event, PaymentStatus.EXPIRED);
+                    } else if ("ai-chat".equalsIgnoreCase(purchaseType)) {
+                        logger.info("⚠️ Payment expired for ai chat");
+                        aiChatPaymentService.handleSessionEventAsync(event, PaymentStatus.EXPIRED);
+                    }
+                }
                 break;
 
             case "checkout.session.async_payment_failed":
-                stripeWebhookHandlerService.handleSessionEventAsync(event, PaymentStatus.FAILURE);
+                if (purchaseType != null) {
+                    if ("book-therapist".equalsIgnoreCase(purchaseType)) {
+                        logger.info("❌ Payment failed for book therapist");
+                        stripeWebhookHandlerService.handleSessionEventAsync(event, PaymentStatus.FAILURE);
+                    } else if ("ai-chat".equalsIgnoreCase(purchaseType)) {
+                        logger.info("❌ Payment failed for ai chat");
+                        aiChatPaymentService.handleSessionEventAsync(event, PaymentStatus.FAILURE);
+                    }
+                }
                 break;
 
             default:

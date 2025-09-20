@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.service;
 
-import com.clinicalpsychology.app.exceptionHandling.ResourceAlreadyExistsException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.ResourceAlreadyExistsException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.model.ConnectMethods;
 import com.clinicalpsychology.app.repository.ConnectMethodsRepository;
 import com.clinicalpsychology.app.response.CommonResponse;

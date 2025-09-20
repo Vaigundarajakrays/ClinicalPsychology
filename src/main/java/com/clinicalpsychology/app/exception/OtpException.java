@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.exceptionHandling;
+package com.clinicalpsychology.app.exception;
 
 public class OtpException extends RuntimeException {
     private final String errorCode;

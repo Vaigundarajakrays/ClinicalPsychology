@@ -13,7 +13,7 @@ public class PaymentRequest {
 
     private Double amount;
     private Long quantity;
-    private String name;
+    private String productName;
     private String currency;
     private Long userId;
 

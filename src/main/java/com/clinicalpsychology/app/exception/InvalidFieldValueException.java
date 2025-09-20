@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.exceptionHandling;
+package com.clinicalpsychology.app.exception;
 
 public class InvalidFieldValueException extends RuntimeException {
     public InvalidFieldValueException(String message) {

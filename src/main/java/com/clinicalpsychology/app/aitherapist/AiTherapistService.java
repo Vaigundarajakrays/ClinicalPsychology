@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.service;
+package com.clinicalpsychology.app.aitherapist;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;

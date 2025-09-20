@@ -1,7 +1,7 @@
 package com.clinicalpsychology.app.service;
 
-import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.ResourceNotFoundException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.model.Comment;
 import com.clinicalpsychology.app.repository.CommentRepository;
 import com.clinicalpsychology.app.repository.CommunityPostRepository;

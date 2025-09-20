@@ -1,6 +1,8 @@
 package com.clinicalpsychology.app.service;
 
+import com.clinicalpsychology.app.aitherapist.AiChatPayment;
 import com.clinicalpsychology.app.enums.OtpPurpose;
+import com.clinicalpsychology.app.model.ClientProfile;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -28,6 +30,24 @@ public class EmailService {
         mailSender.send(message);
 
     }
+
+    @Async
+    public void sendAiChatPaymentSuccessEmail(ClientProfile client, AiChatPayment payment) {
+        String subject = "🎉 Payment Successful for AI Chat Package!";
+        String text = "Hi " + client.getName() + ",\n\n"
+                + "Thank you for your payment of " + payment.getAmount() + " " + payment.getCurrency() + " for "
+                + payment.getProductName() + ". Your AI chat package is now activated.\n\n"
+                + "Happy chatting!\n"
+                + "– PsyConnect Team";
+
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(client.getEmail());
+        message.setSubject(subject);
+        message.setText(text);
+        message.setFrom(mailFrom);
+        mailSender.send(message);
+    }
+
 
     // test
     @Async

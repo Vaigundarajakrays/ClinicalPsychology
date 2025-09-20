@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.service;
 
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.model.ChatMessage;
 import com.clinicalpsychology.app.repository.ChatMessageRepository;
 import com.clinicalpsychology.app.response.CommonResponse;

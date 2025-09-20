@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.exceptionHandling;
+package com.clinicalpsychology.app.exception;
 
 import com.stripe.exception.StripeException;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -12,8 +12,6 @@ import org.springframework.mail.MailAuthenticationException;
 import org.springframework.mail.MailException;
 import org.springframework.mail.MailSendException;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.HttpMediaTypeNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;

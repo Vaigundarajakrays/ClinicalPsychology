@@ -58,6 +58,15 @@ public class ClientProfile extends BaseEntity{
 
     private String location;
 
+    // See clientprofile-defaults.md to learn why we used Builder.default and column definition
+    @Column(nullable = false, columnDefinition = "integer default 0")
+    @Builder.Default
+    private Integer chatCount = 0;
+
+    @Column(nullable = false, columnDefinition = "boolean default false")
+    @Builder.Default
+    private boolean paidForAiChat = false;
+
     private String status;
 
 }

@@ -1,9 +1,9 @@
 package com.clinicalpsychology.app.service;
 
 import com.clinicalpsychology.app.enums.Role;
-import com.clinicalpsychology.app.exceptionHandling.ResourceAlreadyExistsException;
-import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.ResourceAlreadyExistsException;
+import com.clinicalpsychology.app.exception.ResourceNotFoundException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.model.Users;
 import com.clinicalpsychology.app.repository.UsersRepository;
 import com.clinicalpsychology.app.response.CommonResponse;

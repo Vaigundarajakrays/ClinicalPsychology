@@ -2,10 +2,10 @@ package com.clinicalpsychology.app.payment;
 
 import com.clinicalpsychology.app.dto.BookingDTO;
 import com.clinicalpsychology.app.enums.PaymentStatus;
-import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
-import com.clinicalpsychology.app.exceptionHandling.ResourceAlreadyExistsException;
-import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.InvalidFieldValueException;
+import com.clinicalpsychology.app.exception.ResourceAlreadyExistsException;
+import com.clinicalpsychology.app.exception.ResourceNotFoundException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.model.Booking;
 import com.clinicalpsychology.app.model.ClientProfile;
 import com.clinicalpsychology.app.model.FixedTimeSlotNew;
@@ -218,6 +218,7 @@ public class PaymentService {
                     .putMetadata("sessionEnd", sessionEndStr)
                     .putMetadata("therapistTimezone", therapistProfile.getTimezone())
                     .putMetadata("clientTimezone", clientProfile.getTimeZone())
+                    .putMetadata("purchaseType", "book-therapist")
                     .putMetadata("bookingId", String.valueOf(savedBooking.getId()));
                     //.addPaymentMethodType(SessionCreateParams.PaymentMethodType.CARD)
 

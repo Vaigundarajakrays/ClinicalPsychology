@@ -1,6 +1,6 @@
 package com.clinicalpsychology.app.controller;
 
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.model.ConnectMethods;
 import com.clinicalpsychology.app.response.CommonResponse;
 import com.clinicalpsychology.app.service.ConnectMethodsService;

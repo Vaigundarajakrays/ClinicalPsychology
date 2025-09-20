@@ -1,8 +1,8 @@
 package com.clinicalpsychology.app.service;
 
-import com.clinicalpsychology.app.exceptionHandling.InvalidFieldValueException;
-import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.InvalidFieldValueException;
+import com.clinicalpsychology.app.exception.ResourceNotFoundException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.model.ContactMessage;
 import com.clinicalpsychology.app.repository.ClientProfileRepository;
 import com.clinicalpsychology.app.repository.ContactMessageRepository;

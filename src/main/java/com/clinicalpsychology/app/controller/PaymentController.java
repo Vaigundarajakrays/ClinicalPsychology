@@ -1,8 +1,8 @@
 package com.clinicalpsychology.app.controller;
 
 import com.clinicalpsychology.app.dto.BookingDTO;
-import com.clinicalpsychology.app.exceptionHandling.ResourceNotFoundException;
-import com.clinicalpsychology.app.exceptionHandling.UnexpectedServerException;
+import com.clinicalpsychology.app.exception.ResourceNotFoundException;
+import com.clinicalpsychology.app.exception.UnexpectedServerException;
 import com.clinicalpsychology.app.payment.PaymentResponse;
 import com.clinicalpsychology.app.payment.PaymentService;
 import com.clinicalpsychology.app.response.CommonResponse;

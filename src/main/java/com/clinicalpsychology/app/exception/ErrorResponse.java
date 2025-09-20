@@ -1,4 +1,4 @@
-package com.clinicalpsychology.app.exceptionHandling;
+package com.clinicalpsychology.app.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
