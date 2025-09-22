@@ -104,6 +104,7 @@ public class AiTherapistController {
                 });
     }
 
+    // trying
     @PostMapping("/checkout")
     public CommonResponse<PaymentResponse> checkoutProducts(@Valid @RequestBody AiChatPaymentDto aiChatPaymentDto) throws StripeException, UnexpectedServerException, ResourceNotFoundException {
         return aiChatPaymentService.checkoutProducts(aiChatPaymentDto);
