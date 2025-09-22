@@ -12,6 +12,7 @@ import com.clinicalpsychology.app.repository.UsersRepository;
 import com.clinicalpsychology.app.response.CommonResponse;
 import com.clinicalpsychology.app.service.ProfanityCheckerService;
 import com.stripe.exception.StripeException;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
@@ -104,7 +105,7 @@ public class AiTherapistController {
     }
 
     @PostMapping("/checkout")
-    public CommonResponse<PaymentResponse> checkoutProducts(@RequestBody AiChatPaymentDto aiChatPaymentDto) throws StripeException, UnexpectedServerException, ResourceNotFoundException {
+    public CommonResponse<PaymentResponse> checkoutProducts(@Valid @RequestBody AiChatPaymentDto aiChatPaymentDto) throws StripeException, UnexpectedServerException, ResourceNotFoundException {
         return aiChatPaymentService.checkoutProducts(aiChatPaymentDto);
     }
 }
