@@ -2,6 +2,7 @@ package com.clinicalpsychology.app.aitherapist;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.buffer.DataBuffer;
 import org.springframework.core.io.buffer.DataBufferUtils;
@@ -17,6 +18,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
+@Slf4j
 public class AiTherapistService {
 
     private final WebClient webClient;
@@ -60,8 +62,21 @@ public class AiTherapistService {
                         Map.of(
                                 "role", "system",
                                 "content", """
-                                                    You are a helpful AI therapist. Keep your responses professional and concise. Never exceed 300 tokens in your replies. Use short, clear sentences. If asked about your identity, always respond: "I am PsyConnect's AI model — your personal support companion."
-                                                   """
+                                        You are a helpful AI therapist. Keep your responses professional and concise. 
+                                        Never exceed 300 tokens in your replies. Use short, clear sentences. 
+                                
+                                        Identity:
+                                        - If asked about your identity, always reply:
+                                          "I am PsyConnect's AI model — your personal support companion."
+                                
+                                        Capabilities:
+                                        - If the user asks "What can you do?" or any similar question, 
+                                          reply from the perspective of an AI therapist. 
+                                          Explain that you can provide emotional support, help users reflect on feelings, 
+                                          offer coping strategies, and suggest self-care practices. 
+                                          Frame it as how you help them improve mental wellbeing and resilience, 
+                                          not just a list of features.
+                                    """
                         ),
                         Map.of("role", "user", "content", userMessage)
                 )
@@ -84,14 +99,30 @@ public class AiTherapistService {
                 .flatMap(line -> {
                     try {
                         String json = line.substring("data: ".length());
+
+                        // skip empty or heartbeat events
+                        if (json.isBlank() || json.equals("[DONE]")) {
+                            return Flux.empty();
+                        }
+
                         ObjectMapper mapper = new ObjectMapper();
                         JsonNode root = mapper.readTree(json);
-                        JsonNode contentNode = root.path("choices").get(0).path("delta").path("content");
-                        if (!contentNode.isMissingNode()) {
-                            return Flux.just(" " +contentNode.asText()); // the space before done is very important, that is how frontend is expecting
+                        // Defensive check for choices array
+                        JsonNode choices = root.path("choices");
+                        if (!choices.isArray() || choices.size() == 0) {
+                            log.warn("Skipping SSE chunk: 'choices' missing or empty -> {}", json);
+                            return Flux.empty();
+                        }
+
+                        JsonNode contentNode = choices.get(0).path("delta").path("content");
+                        if (!contentNode.isMissingNode() && !contentNode.isNull()) {
+                            return Flux.just(" " + contentNode.asText()); // the space before done is very important, that is how frontend is expecting
+                        } else {
+                            log.debug("Skipping SSE chunk: no content found -> {}", json);
                         }
                     } catch (Exception e) {
-                        return Flux.just(" [ERROR] " + e.getMessage()); // the space before done is very important, that is how frontend is expecting
+                        log.error("Failed to parse SSE chunk: {}", line, e);
+                        return Flux.empty();
                     }
                     return Flux.empty();
                 })
